@@ -5,7 +5,10 @@
  */
 package mineracaodadoseleitorais.acessoadados.DAO;
 
+import java.io.IOException;
 import java.sql.*;
+import mineracaodadoseleitorais.acessoadados.BemDeCandidatoFileTableReader;
+import mineracaodadoseleitorais.negocio.BemDeCandidato;
 
 /**
  *
@@ -29,14 +32,34 @@ public class DAOTSE {
     }
     
     public void disconnect() throws SQLException{
+        // stmt.close();
         dbConnection.close();
     }
     
     public void insert() throws SQLException{
-        query = "insert into BemDeCandidato values (2026, 'BIKE09', 'NAC26', 'nova', '0036', 'RJ', 300)";
+        query = "insert into BemDeCandidato values ('2026', 'BIKE09', 'NAC26', 'nova', '0036', 'RJ', '300')";
         stmt = dbConnection.createStatement();
         stmt.execute(query);
         stmt.close();
+    }
+    
+    public void insertAll() throws SQLException{
+        BemDeCandidatoFileTableReader ftr = new BemDeCandidatoFileTableReader();
+        try {
+                ftr.getAll();
+                stmt = dbConnection.createStatement();
+                int i = 0;
+                for(BemDeCandidato bc : ftr.getRows()){
+                    query = String.format("insert into BemDeCandidato values ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %d)",
+                            bc.getAnoEleicao(), bc.getDescricaoEleicao(), bc.getSiglaUF(), bc.getSeqCandidato(),
+                            bc.getCodigoTipoDeBem(), bc.getDescricaoTipoDeBem(),
+                            bc.getDetalheBem(), bc.getValorBem(), i++);
+                    stmt.execute(query);
+                }
+                stmt.close();
+        } catch (IOException e) {
+                e.printStackTrace();
+        }
     }
     
     public ResultSet get() throws SQLException{
