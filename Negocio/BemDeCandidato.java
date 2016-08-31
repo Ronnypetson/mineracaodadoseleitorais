@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mineracaodadoseleitorais;
+package mineracaodadoseleitorais.negocio;
 
 /**
  *
@@ -23,16 +23,16 @@ public class BemDeCandidato {
     }
 
     public BemDeCandidato(String[] entry) {
-        this.AnoEleicao = entry[0];
-        this.DescricaoEleicao = entry[1];
-        this.SiglaUF = entry[2];
-        this.SeqCandidato = entry[3];
-        this.CodigoTipoDeBem = entry[4];
-        this.DescricaoTipoDeBem = entry[5];
-        this.DetalheBem = entry[6];
-        this.ValorBem = entry[7];
+        this.AnoEleicao = entry[2];
+        this.DescricaoEleicao = entry[3];
+        this.SiglaUF = entry[4];
+        this.SeqCandidato = entry[5];
+        this.CodigoTipoDeBem = entry[6];
+        this.DescricaoTipoDeBem = entry[7];
+        this.DetalheBem = entry[8];
+        this.ValorBem = entry[9];
     }
-
+    
     public String getAnoEleicao() {
         return AnoEleicao;
     }
