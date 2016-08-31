@@ -16,6 +16,8 @@ public class DAOTSE {
     private final String password = "123";
     private final String dbURL = "jdbc:derby://localhost:1527/db_test1";
     private final String userName = "ronny";
+    private String query;
+    private Statement stmt;
     
     public DAOTSE() throws ClassNotFoundException, InstantiationException, IllegalAccessException{
         Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance(); // Client
@@ -31,26 +33,32 @@ public class DAOTSE {
     }
     
     public void insert() throws SQLException{
-        String query = "insert into Candidatura values (50, 'manero')";
-        Statement stmt = dbConnection.createStatement();
+        query = "insert into BemDeCandidato values (2026, 'BIKE09', 'NAC26', 'nova', '0036', 'RJ', 300)";
+        stmt = dbConnection.createStatement();
         stmt.execute(query);
         stmt.close();
     }
     
     public ResultSet get() throws SQLException{
-        String query = "select * from BemDeCandidato";
+        query = "select * from BemDeCandidato";
         Statement stmt = dbConnection.createStatement();
         ResultSet results = stmt.executeQuery(query);
-        stmt.close();
+        // stmt.close();
         return results;
     }
     
     public void printGet() throws SQLException{
-        ResultSet results = get();
-        while(results.next()){
-            System.out.println("Result: " + results.getInt("id")
-                                        + " | " + results.getString("nome"));
+        ResultSet results = null;
+        try {
+            results = get();
+            while(results.next()){
+                System.out.println("Result: " + results.getInt("AnoEleicao")
+                        + " | " + results.getString("SeqCandidato"));
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        } finally {
+            results.close();
         }
-        results.close();
     }
 }
