@@ -1,4 +1,4 @@
--- -- Table Candidato
+-- -- Table
 -- create table BemDeCandidato (AnoEleicao int, CodigoTipoDeBem varchar(100),
 --         DescricaoEleicao varchar(1000), DetalheBem varchar(1000), SeqCandidato varchar(100),
 --         SiglaUF varchar(10), ValorBem float, primary key(SeqCandidato, CodigoTipoDeBem, DetalheBem) );
