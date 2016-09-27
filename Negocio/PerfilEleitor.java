@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mineracaodadoseleitorais;
+package mineracaodadoseleitorais.negocio;
 
 /**
  *
@@ -19,26 +19,26 @@ public class PerfilEleitor {
     private String FaixaEtaria;
     private String GrauDeEscolaridade;
     private String QtdNoPerfil;
-
+    
     public PerfilEleitor() {
     }
-
+    
     public PerfilEleitor(String[] entry) {
-    	if (entry.length != 9) {
+    	/* if (entry.length != 9) {
     		throw new RuntimeException("Unexpected entry");
-    	}
+    	} */
     	
-        this.Periodo = entry[0];
-        this.UF = entry[1];
-        this.Municipio = entry[2];
-        this.CodigoMunicipioTSE = entry[3];
-        this.NumZona = entry[4];
-        this.Sexo = entry[5];
-        this.FaixaEtaria = entry[6];
-        this.GrauDeEscolaridade = entry[7];
-        this.QtdNoPerfil = entry[8];
+        this.Periodo = entry[2];
+        this.UF = entry[3];
+        this.Municipio = entry[5];
+        this.CodigoMunicipioTSE = entry[4];
+        this.NumZona = entry[6];
+        this.Sexo = entry[15];
+        this.FaixaEtaria = entry[11];
+        this.GrauDeEscolaridade = entry[13];
+        this.QtdNoPerfil = entry[16];
     }
-
+    
     public String getPeriodo() {
         return Periodo;
     }

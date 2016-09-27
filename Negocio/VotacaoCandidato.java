@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mineracaodadoseleitorais;
+package mineracaodadoseleitorais.negocio;
 
 import java.util.Arrays;
 
@@ -29,31 +29,31 @@ public class VotacaoCandidato extends Votacao {
     private String ComposicaoLegenda;
     private String TotalVotos;
     private String VotoEmTransito;
-
+    
     public VotacaoCandidato() {
     }
-
+    
     public VotacaoCandidato(String[] entry) {
         super(Arrays.copyOfRange(entry, 0, 9));
-        this.NumeroCandidato = entry[9];
-        this.SeqCandidato = entry[10];
-        this.NomeCandidato = entry[11];
-        this.NomeUrnaCandidato = entry[12];
-        this.CodigoSituacaoCandidatoSuperior = entry[13];
-        this.DescricaoSituacaoCandidatoSuperior = entry[14];
-        this.CodigoSituacaoCandidato = entry[15];
-        this.DescricaoSituacaoCandidato = entry[16];
-        this.CodigoSituacaoCandidatoTotal = entry[17];
-        this.DescricaoSituacaoCandidatoTotal = entry[18];
-        this.NumeroPartido = entry[19];
-        this.SiglaPartido = entry[20];
-        this.SeqLegenda = entry[21];
-        this.NomeColigacao = entry[22];
-        this.ComposicaoLegenda = entry[23];
-        this.TotalVotos = entry[24];
-        this.VotoEmTransito = entry[25];
+        this.NumeroCandidato = entry[11];
+        this.SeqCandidato = entry[12];
+        this.NomeCandidato = entry[13];
+        this.NomeUrnaCandidato = entry[14];
+        this.CodigoSituacaoCandidatoSuperior = entry[16];
+        this.DescricaoSituacaoCandidatoSuperior = entry[17];
+        this.CodigoSituacaoCandidato = entry[18];
+        this.DescricaoSituacaoCandidato = entry[19];
+        this.CodigoSituacaoCandidatoTotal = entry[20];
+        this.DescricaoSituacaoCandidatoTotal = entry[21];
+        this.NumeroPartido = entry[22];
+        this.SiglaPartido = entry[23];
+        this.SeqLegenda = entry[25];
+        this.NomeColigacao = entry[26];
+        this.ComposicaoLegenda = entry[27];
+        this.TotalVotos = entry[28];
+        this.VotoEmTransito = entry[29];
     }
-
+    
     public String getNumeroCandidato() {
         return NumeroCandidato;
     }

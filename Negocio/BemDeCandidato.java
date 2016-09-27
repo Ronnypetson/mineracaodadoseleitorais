@@ -18,7 +18,7 @@ public class BemDeCandidato {
     private String DescricaoTipoDeBem;
     private String DetalheBem;
     private String ValorBem;
-
+    
     public BemDeCandidato() {
     }
 

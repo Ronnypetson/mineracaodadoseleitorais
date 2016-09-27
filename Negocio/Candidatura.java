@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mineracaodadoseleitorais;
+package mineracaodadoseleitorais.negocio;
 
 import java.util.Arrays;
 
@@ -39,41 +39,41 @@ public class Candidatura extends Votavel {
     private String DespesaMaximaCampanha;
     private String CodigoTotalizacaoTurno;
     private String EmailCandidato;
-
+    
     public Candidatura() {
     }
-
+    
     public Candidatura(String[] entry) {
         super(Arrays.copyOfRange(entry, 27, 34));
-        this.NomeCandidato = entry[0];
-        this.SeqCandidato = entry[1];
-        this.NumeroCandidato = entry[2];
-        this.CPFCandidato = entry[3];
-        this.NomeUrnaCandidato = entry[4];
-        this.NumeroPartido = entry[5];
-        this.SiglaPartido = entry[6];
-        this.NomePartido = entry[7];
-        this.CodigoLegenda = entry[8];
-        this.SiglaLegenda = entry[9];
-        this.ComposicaoLegenda = entry[10];
-        this.NomeLegenda = entry[11];
-        this.DescricaoOcupacao = entry[12];
-        this.DataNascimento = entry[13];
-        this.NumTituloEleitoral = entry[14];
-        this.IdadeNaEleicao = entry[15];
-        this.DescricaoSexo = entry[16];
-        this.DescricaoGrauInstrucao = entry[17];
-        this.DescricaoEstadoCivil = entry[18];
-        this.DescricaoCorRaca = entry[19];
-        this.CodigoNacionalidade = entry[20];
-        this.SiglaUFNascimento = entry[21];
-        this.CodigoMunicipioNascimento = entry[22];
-        this.NomeMunicipioNascimento = entry[23];
-        this.DespesaMaximaCampanha = entry[24];
-        this.CodigoTotalizacaoTurno = entry[25];
-        this.EmailCandidato = entry[26];
+        this.NomeCandidato = entry[10];
+        this.SeqCandidato = entry[11];
+        this.NumeroCandidato = entry[12];
+        this.CPFCandidato = entry[13];
+        this.NomeUrnaCandidato = entry[14];
+        this.NumeroPartido = entry[17];
+        this.SiglaPartido = entry[18];
+        this.NomePartido = entry[19];
+        this.CodigoLegenda = entry[20];
+        this.SiglaLegenda = entry[21];
+        this.ComposicaoLegenda = entry[22];
+        this.NomeLegenda = entry[23];
+        this.DescricaoOcupacao = entry[25];
+        this.DataNascimento = entry[26];
+        this.NumTituloEleitoral = entry[27];
+        this.IdadeNaEleicao = entry[28];
+        this.DescricaoSexo = entry[30];
+        this.DescricaoGrauInstrucao = entry[32];
+        this.DescricaoEstadoCivil = entry[34];
+        this.DescricaoCorRaca = entry[36];
+        this.CodigoNacionalidade = entry[37];
+        this.SiglaUFNascimento = entry[39];
+        this.CodigoMunicipioNascimento = entry[40];
+        this.NomeMunicipioNascimento = entry[41];
+        this.DespesaMaximaCampanha = entry[42];
+        this.CodigoTotalizacaoTurno = entry[43];
+        this.EmailCandidato = entry[45];
     }
-
+    
     public String getNomeCandidato() {
         return NomeCandidato;
     }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mineracaodadoseleitorais;
+package mineracaodadoseleitorais.negocio;
 
 import java.util.Arrays;
 
@@ -24,20 +24,20 @@ public class VotacaoPartido extends Votacao {
     
     public VotacaoPartido(){
     }
-
+    
     public VotacaoPartido(String[] entry) {
         super(Arrays.copyOfRange(entry, 0, 9));
-        this.TipoLegenda = entry[9];
-        this.NomeColigacao = entry[10];
-        this.ComposicaoLegenda = entry[11];
-        this.SiglaPartido = entry[12];
-        this.NumeroPartido = entry[13];
-        this.NomePartido = entry[14];
-        this.QtdVotosNominais = entry[15];
-        this.QtdVotosLegenda = entry[16];
-        this.VotoEmTransito = entry[17];
+        this.TipoLegenda = entry[12];
+        this.NomeColigacao = entry[13];
+        this.ComposicaoLegenda = entry[14];
+        this.SiglaPartido = entry[15];
+        this.NumeroPartido = entry[16];
+        this.NomePartido = entry[17];
+        this.QtdVotosNominais = entry[18];
+        this.QtdVotosLegenda = entry[19];
+        this.VotoEmTransito = entry[20];
     }
-
+    
     public String getTipoLegenda() {
         return TipoLegenda;
     }

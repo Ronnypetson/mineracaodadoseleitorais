@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mineracaodadoseleitorais;
+package mineracaodadoseleitorais.negocio;
 
 import java.util.Arrays;
 
@@ -12,6 +12,7 @@ import java.util.Arrays;
  * @author ronnypetsonss
  */
 public class VotacaoSecao extends Votacao {
+
     private String NumZona;
     private String NumSecao;
     private String NumeroDoVotavel;
@@ -19,43 +20,43 @@ public class VotacaoSecao extends Votacao {
 
     public VotacaoSecao() {
     }
-
+    
     public VotacaoSecao(String[] entry) {
         super(Arrays.copyOfRange(entry, 0, 9));
         this.NumZona = entry[9];
         this.NumSecao = entry[10];
-        this.NumeroDoVotavel = entry[11];
-        this.QtdVotos = entry[12];
+        this.NumeroDoVotavel = entry[13];
+        this.QtdVotos = entry[14];
     }
-
+    
     public String getNumZona() {
         return NumZona;
     }
-
+    
     public void setNumZona(String NumZona) {
         this.NumZona = NumZona;
     }
-
+    
     public String getNumSecao() {
         return NumSecao;
     }
-
+    
     public void setNumSecao(String NumSecao) {
         this.NumSecao = NumSecao;
     }
-
+    
     public String getNumeroDoVotavel() {
         return NumeroDoVotavel;
     }
-
+    
     public void setNumeroDoVotavel(String NumeroDoVotavel) {
         this.NumeroDoVotavel = NumeroDoVotavel;
     }
-
+    
     public String getQtdVotos() {
         return QtdVotos;
     }
-
+    
     public void setQtdVotos(String QtdVotos) {
         this.QtdVotos = QtdVotos;
     }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mineracaodadoseleitorais;
+package mineracaodadoseleitorais.negocio;
 
 /**
  *
@@ -22,7 +22,7 @@ public class Votacao {
     
     public Votacao(){
     }
-
+    
     public Votacao(String[] entry) {
         this.AnoEleicao = entry[0];
         this.NumTurno = entry[1];

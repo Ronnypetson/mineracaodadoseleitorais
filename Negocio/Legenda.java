@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mineracaodadoseleitorais;
+package mineracaodadoseleitorais.negocio;
 
 import java.util.Arrays;
 
@@ -19,21 +19,31 @@ public class Legenda extends Votavel {
     private String SiglaColigacao;
     private String NomeColigacao;
     private String ComposicaoColigacao;
+    private String SeqColigacao;
 
     public Legenda() {
     }
 
     public Legenda(String[] entry) {
         super(Arrays.copyOfRange(entry, 7, 14));
-        this.TipoLegenda = entry[0];
-        this.NumeroPartido = entry[1];
-        this.SiglaPartido = entry[2];
-        this.NomePartido = entry[3];
-        this.SiglaColigacao = entry[4];
-        this.NomeColigacao = entry[5];
-        this.ComposicaoColigacao = entry[6];
+        this.TipoLegenda = entry[10];
+        this.NumeroPartido = entry[11];
+        this.SiglaPartido = entry[12];
+        this.NomePartido = entry[13];
+        this.SiglaColigacao = entry[14];
+        this.NomeColigacao = entry[15];
+        this.ComposicaoColigacao = entry[16];
+        this.SeqColigacao = entry[17];
+    }
+    
+    public String getSeqColigacao() {
+        return SeqColigacao;
     }
 
+    public void setSeqColigacao(String SeqColigacao) {
+        this.SeqColigacao = SeqColigacao;
+    }
+    
     public String getTipoLegenda() {
         return TipoLegenda;
     }
