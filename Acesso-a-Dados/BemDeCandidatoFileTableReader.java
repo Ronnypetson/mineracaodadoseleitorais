@@ -1,17 +1,29 @@
-package mineracaodadoseleitorais;
+package mineracaodadoseleitorais.DAO;
 
+import java.io.IOException;
+import mineracaodadoseleitorais.negocio.BemDeCandidato;
 import java.util.ArrayList;
 
 public class BemDeCandidatoFileTableReader extends FileTableReader {
 
-private ArrayList<BemDeCandidato> rows;
+        // private ArrayList<BemDeCandidato> rows;
 	
 	static final String TABLE_PATH
                 = "C:\\Users\\ronnypetsonss\\Documents\\UFRN 2016.2\\Projeto de Software\\dados eleitorais de 2014\\bem_candidato_2014\\bem_candidato_2014_RN.txt";
 	
-	public BemDeCandidatoFileTableReader() {
+	public BemDeCandidatoFileTableReader() throws IOException {
 		super(TABLE_PATH);
-		rows = new ArrayList<BemDeCandidato>();
+		rows = new ArrayList<>();
+                this.columns = new String[8];
+                columns[0] = "ANOELEICAO";
+                columns[1] = "DESCRICAOELEICAO";
+                columns[2] = "SIGLAUF";
+                columns[3] = "SEQCANDIDATO";
+                columns[4] = "CODIGOTIPODEBEM";
+                columns[5] = "DESCRICAOTIPODEBEM";
+                columns[6] = "DETALHEBEM";
+                columns[7] = "VALORBEM";
+                // ID_BEM
 	}
 	
 	@Override
@@ -20,7 +32,6 @@ private ArrayList<BemDeCandidato> rows;
 	}
 	
 	public BemDeCandidato getRow(int index) {
-		return rows.get(index);
+		return (BemDeCandidato)this.rows.get(index);
 	}
-
 }
