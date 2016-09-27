@@ -1,23 +1,20 @@
 package mineracaodadoseleitorais;
 
-import mineracaodadoseleitorais.acessoadados.BemDeCandidatoFileTableReader;
+import mineracaodadoseleitorais.DAO.BemDeCandidatoFileTableReader;
 import java.io.IOException;
-import java.util.Scanner;
+import java.sql.SQLException;
+// import java.util.Scanner;
+import mineracaodadoseleitorais.DAO.DAOTSE;
 
 public class Main {
 
-	public static void main(String[] args) {
-		BemDeCandidatoFileTableReader ftr = new BemDeCandidatoFileTableReader();
-		try {
-			ftr.getAll();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		Scanner scanner = new Scanner(System.in);
-		int index = scanner.nextInt();
-		System.out.println(ftr.getRow(index).getDetalheBem());
-		scanner.close();
+	public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException, IOException {
+                // DAO testing
+                DAOTSE myDAO = new DAOTSE();
+                myDAO.connect();
+                // myDAO.clearTable("PerfilEleitor");
+                // myDAO.insertAllVotacaoSecao();
+                myDAO.printGet("VotacaoSecao");
+                myDAO.disconnect();
 	}
-
 }
