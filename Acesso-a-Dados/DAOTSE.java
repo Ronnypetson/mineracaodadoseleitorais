@@ -146,7 +146,8 @@ public class DAOTSE {
                 VotacaoCandidato vc = (VotacaoCandidato) ob;
                 query = String.format("insert into VotacaoCandidato values ('%s',"
                         + " '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s',"
-                        + " '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %d)",
+                        + " '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s',"
+                        + " %d, '%s', '%s', '%s')",
                         vc.getNumeroCandidato(), vc.getSeqCandidato(),
                         vc.getNomeCandidato(), vc.getNomeUrnaCandidato(),
                         vc.getCodigoSituacaoCandidatoSuperior(),
@@ -158,7 +159,8 @@ public class DAOTSE {
                         vc.getNumeroPartido(), vc.getSiglaPartido(),
                         vc.getSeqLegenda(), vc.getNomeColigacao(),
                         vc.getComposicaoLegenda(), vc.getTotalVotos(),
-                        vc.getVotoEmTransito(), i++);
+                        vc.getVotoEmTransito(), i++, vc.getCodigoMunicipio(),
+                        vc.getNomeMunicipio(), vc.getNumZona());
                 stmt.execute(query);
                 // stmt.close();
             }
@@ -251,6 +253,32 @@ public class DAOTSE {
         int columnCount = results.getMetaData().getColumnCount();
         while(results.next()){
             PerfilEleitor perf = new PerfilEleitor();
+            String entry[] = new String[columnCount];
+            for(int i = 0; i < columnCount; i++){
+                entry[i] = results.getString(i+1);
+            }
+            perf.setAll(entry);
+            perfis.add(perf);
+        }
+        return perfis;
+    }
+    
+    public ArrayList getPerfisCandidaturasMunicipioDescVotos(String municipio) throws SQLException{
+        municipio = municipio.toUpperCase();
+        query = String.format("SELECT * FROM Candidatura"
+                    + " INNER JOIN VotacaoCandidato"
+                    + " ON "
+                    + " CAST( Candidatura.SeqCandidato AS VARCHAR(128) ) = "
+                    + " CAST( VotacaoCandidato.SeqCandidato AS VARCHAR(128) ) "
+                    + " WHERE CAST( VotacaoCandidato.NomeMunicipio AS VARCHAR(128) ) = '\"%s\"' "
+                    , municipio);
+        Statement stmt = dbConnection.createStatement();
+        ResultSet results = stmt.executeQuery(query);
+        //
+        ArrayList<Candidatura> perfis = new ArrayList<>();
+        int columnCount = results.getMetaData().getColumnCount();
+        while(results.next()){
+            Candidatura perf = new Candidatura();
             String entry[] = new String[columnCount];
             for(int i = 0; i < columnCount; i++){
                 entry[i] = results.getString(i+1);
