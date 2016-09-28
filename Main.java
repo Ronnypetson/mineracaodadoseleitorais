@@ -18,8 +18,8 @@ public class Main {
         myDAO.connect();
         // myDAO.clearTable("VotacaoCandidato");
         // myDAO.insertAllVotacaoCandidato();
-        // myDAO.printGet("VotacaoSecao");
-        ArrayList<Candidatura> perfis = myDAO.getPerfisCandidaturasSecao("56");
+        // myDAO.printGet("Candidatura");
+        // ArrayList<VotacaoCandidato> perfis = myDAO.getVotacaoCandidatoPorMunicipio("LEILA SOLANGE TAVARES");
         myDAO.disconnect();
     }
 }
