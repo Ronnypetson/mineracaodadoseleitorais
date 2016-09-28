@@ -315,6 +315,28 @@ public class DAOTSE {
         return perfis;
     }
     
+    public ArrayList getVotacaoCandidatoPorMunicipio(String candidato) throws SQLException{
+        candidato = candidato.toUpperCase();
+        query = String.format("SELECT * FROM VotacaoCandidato"
+                    + " WHERE CAST( VotacaoCandidato.NomeCandidato AS VARCHAR(128) ) LIKE '\"%s\"' "
+                    , candidato);
+        Statement stmt = dbConnection.createStatement();
+        ResultSet results = stmt.executeQuery(query);
+        //
+        ArrayList<VotacaoCandidato> perfis = new ArrayList<>();
+        int columnCount = results.getMetaData().getColumnCount();
+        while(results.next()){
+            VotacaoCandidato perf = new VotacaoCandidato();
+            String entry[] = new String[columnCount];
+            for(int i = 0; i < columnCount; i++){
+                entry[i] = results.getString(i+1);
+            }
+            perf.setAll(entry);
+            perfis.add(perf);
+        }
+        return perfis;
+    }
+    
     private ResultSet get(String tableName) throws SQLException { // throws SQLException
         query = "select * from " + tableName;
         Statement stmt = dbConnection.createStatement();
