@@ -7,6 +7,7 @@ package mineracaodadoseleitorais.DAO;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
 import mineracaodadoseleitorais.negocio.*;
 /**
  *
@@ -35,6 +36,7 @@ public class DAOTSE {
         dbConnection.close();
     }
     
+    // Inserts
     public void insertAllBemDeCandidato() throws SQLException, IOException {
         BemDeCandidatoFileTableReader ftr = new BemDeCandidatoFileTableReader();
         try {
@@ -208,7 +210,7 @@ public class DAOTSE {
         }
     }
     
-    //
+    // Delete
     public void clearTable(String tableName) throws SQLException {
         query = "delete from " + tableName + " where true";
         Statement stmt = dbConnection.createStatement();
@@ -216,7 +218,50 @@ public class DAOTSE {
         stmt.close();
     }
     
-    public ResultSet get(String tableName) throws SQLException { // throws SQLException
+    // Query
+    public ArrayList getPerfisEleitoresMunicipio(String municipio) throws SQLException{
+        query
+            = String.format("select * from PerfilEleitor"
+                    + " where CAST( Municipio AS VARCHAR(128) ) = '\"%s\"' ", municipio);
+        Statement stmt = dbConnection.createStatement();
+        ResultSet results = stmt.executeQuery(query);
+        //
+        ArrayList<PerfilEleitor> perfis = new ArrayList<>();
+        int columnCount = results.getMetaData().getColumnCount();
+        while(results.next()){
+            PerfilEleitor perf = new PerfilEleitor();
+            String entry[] = new String[columnCount];
+            for(int i = 0; i < columnCount; i++){
+                entry[i] = results.getString(i+1);
+            }
+            perf.setAll(entry);
+            perfis.add(perf);
+        }
+        return perfis;
+    }
+    
+    public ArrayList getPerfisEleitoresZona(String zona) throws SQLException{
+        query
+            = String.format("select * from PerfilEleitor"
+                    + " where CAST( NumZona AS VARCHAR(128) ) = '\"%s\"' ", zona);
+        Statement stmt = dbConnection.createStatement();
+        ResultSet results = stmt.executeQuery(query);
+        //
+        ArrayList<PerfilEleitor> perfis = new ArrayList<>();
+        int columnCount = results.getMetaData().getColumnCount();
+        while(results.next()){
+            PerfilEleitor perf = new PerfilEleitor();
+            String entry[] = new String[columnCount];
+            for(int i = 0; i < columnCount; i++){
+                entry[i] = results.getString(i+1);
+            }
+            perf.setAll(entry);
+            perfis.add(perf);
+        }
+        return perfis;
+    }
+    
+    private ResultSet get(String tableName) throws SQLException { // throws SQLException
         query = "select * from " + tableName;
         Statement stmt = dbConnection.createStatement();
         ResultSet results = stmt.executeQuery(query);
@@ -224,6 +269,7 @@ public class DAOTSE {
         return results;
     }
     
+    // Print query result
     public void printGet(String tableName) throws SQLException {
         ResultSet results;
         results = get(tableName);
@@ -236,39 +282,13 @@ public class DAOTSE {
         }
     }
     
-    // --
-    public void printGetCandidatura() throws SQLException {
-        ResultSet results;
-        results = get("Candidatura");
+    private void printGet(ResultSet results) throws SQLException {
+        int columnCount = results.getMetaData().getColumnCount();
         while (results.next()) { // results.toString()
-            System.out.println(": " + results.getString("SEQCANDIDATO")
-                    + " |   " + results.getString("NOMEURNACANDIDATO")
-                    + " |   " + results.getString("SIGLAPARTIDO")
-                    + " |   " + results.getString("NOMELEGENDA")
-                    + " |   " + results.getString("DESPESAMAXIMACAMPANHA")
-                    + " |   " + results.getString("CODIGOTOTALIZACAOTURNO")
-                    + " |   " + results.getString("EMAILCANDIDATO"));
+            for(int i = 1; i <= columnCount; i++){
+                System.out.print(" | " + results.getString(i));
+            }
+            System.out.println();
         }
-    }
-    
-    public void printGetBemDeCandidato() throws SQLException {
-        ResultSet results;
-        results = get("BemDeCandidato");
-        while (results.next()) {
-            System.out.println(": " + results.getString("AnoEleicao")
-                    + " |   " + results.getString("DescricaoEleicao")
-                    + " |   " + results.getString("SiglaUF")
-                    + " |   " + results.getString("SeqCandidato")
-                    + " |   " + results.getString("CodigoTipoDeBem")
-                    + " |   " + results.getString("DetalheBem")
-                    + " |   " + results.getString("ValorBem"));
-        }
-    }
-    
-    public void insertTest() throws SQLException {
-        query = "insert into BemDeCandidato values ('2026', 'BIKE09', 'NAC26', 'nova', '0036', 'RJ', '300')";
-        stmt = dbConnection.createStatement();
-        stmt.execute(query);
-        stmt.close();
     }
 }
