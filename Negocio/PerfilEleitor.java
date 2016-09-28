@@ -39,6 +39,18 @@ public class PerfilEleitor {
         this.QtdNoPerfil = entry[16];
     }
     
+    public void setAll(String[] entry){
+        this.Periodo = entry[0];
+        this.UF = entry[1];
+        this.Municipio = entry[2];
+        this.CodigoMunicipioTSE = entry[3];
+        this.NumZona = entry[4];
+        this.Sexo = entry[5];
+        this.FaixaEtaria = entry[6];
+        this.GrauDeEscolaridade = entry[7];
+        this.QtdNoPerfil = entry[8];
+    }
+    
     public String getPeriodo() {
         return Periodo;
     }
