@@ -13,7 +13,7 @@ import java.util.Arrays;
  */
 public class VotacaoSecao extends Votacao {
 
-    private String NumZona;
+    // private String NumZona;
     private String NumSecao;
     private String NumeroDoVotavel;
     private String QtdVotos;
@@ -29,10 +29,20 @@ public class VotacaoSecao extends Votacao {
         this.QtdVotos = entry[14];
     }
     
+    @Override
+    public void setAll(String[] entry){
+        this.NumZona = entry[0];
+        this.NumSecao = entry[1];
+        this.NumeroDoVotavel = entry[2];
+        this.QtdVotos = entry[3];
+    }
+    
+    @Override
     public String getNumZona() {
         return NumZona;
     }
     
+    @Override
     public void setNumZona(String NumZona) {
         this.NumZona = NumZona;
     }
