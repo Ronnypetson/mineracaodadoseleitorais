@@ -263,7 +263,7 @@ public class DAOTSE {
         return perfis;
     }
     
-    public ArrayList getPerfisCandidaturasMunicipioDescVotos(String municipio) throws SQLException{
+    public ArrayList getPerfisCandidaturasMunicipio(String municipio) throws SQLException{
         municipio = municipio.toUpperCase();
         query = String.format("SELECT * FROM Candidatura"
                     + " INNER JOIN VotacaoCandidato"
@@ -272,6 +272,32 @@ public class DAOTSE {
                     + " CAST( VotacaoCandidato.SeqCandidato AS VARCHAR(128) ) "
                     + " WHERE CAST( VotacaoCandidato.NomeMunicipio AS VARCHAR(128) ) = '\"%s\"' "
                     , municipio);
+        Statement stmt = dbConnection.createStatement();
+        ResultSet results = stmt.executeQuery(query);
+        //
+        ArrayList<Candidatura> perfis = new ArrayList<>();
+        int columnCount = results.getMetaData().getColumnCount();
+        while(results.next()){
+            Candidatura perf = new Candidatura();
+            String entry[] = new String[columnCount];
+            for(int i = 0; i < columnCount; i++){
+                entry[i] = results.getString(i+1);
+            }
+            perf.setAll(entry);
+            perfis.add(perf);
+        }
+        return perfis;
+    }
+    
+    public ArrayList getPerfisCandidaturasSecao(String secao) throws SQLException{
+        secao = secao.toUpperCase();
+        query = String.format("SELECT * FROM Candidatura"
+                    + " INNER JOIN VotacaoSecao"
+                    + " ON "
+                    + " CAST( Candidatura.NumeroCandidato AS VARCHAR(128) ) = "
+                    + " CAST( VotacaoSecao.NumeroDoVotavel AS VARCHAR(128) ) "
+                    + " WHERE CAST( VotacaoSecao.NumSecao AS VARCHAR(128) ) = '\"%s\"' "
+                    , secao);
         Statement stmt = dbConnection.createStatement();
         ResultSet results = stmt.executeQuery(query);
         //
