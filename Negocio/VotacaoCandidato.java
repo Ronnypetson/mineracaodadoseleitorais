@@ -35,6 +35,9 @@ public class VotacaoCandidato extends Votacao {
     
     public VotacaoCandidato(String[] entry) {
         super(Arrays.copyOfRange(entry, 0, 9));
+        this.CodigoMunicipio = entry[7];
+        this.NomeMunicipio = entry[8];
+        this.NumZona = entry[9];
         this.NumeroCandidato = entry[11];
         this.SeqCandidato = entry[12];
         this.NomeCandidato = entry[13];
@@ -52,6 +55,31 @@ public class VotacaoCandidato extends Votacao {
         this.ComposicaoLegenda = entry[27];
         this.TotalVotos = entry[28];
         this.VotoEmTransito = entry[29];
+    }
+    
+    @Override
+    public void setAll(String[] entry){
+        this.NumeroCandidato = entry[0];
+        this.SeqCandidato = entry[1];
+        this.NomeCandidato = entry[2];
+        this.NomeUrnaCandidato = entry[3];
+        this.CodigoSituacaoCandidatoSuperior = entry[4];
+        this.DescricaoSituacaoCandidatoSuperior = entry[5];
+        this.CodigoSituacaoCandidato = entry[6];
+        this.DescricaoSituacaoCandidato = entry[7];
+        this.CodigoSituacaoCandidatoTotal = entry[8];
+        this.DescricaoSituacaoCandidatoTotal = entry[9];
+        this.NumeroPartido = entry[10];
+        this.SiglaPartido = entry[11];
+        this.SeqLegenda = entry[12];
+        this.NomeColigacao = entry[13];
+        this.ComposicaoLegenda = entry[14];
+        this.TotalVotos = entry[15];
+        this.VotoEmTransito = entry[16];
+        // ID
+        this.CodigoMunicipio = entry[18];
+        this.NomeMunicipio = entry[19];
+        this.NumZona = entry[20];
     }
     
     public String getNumeroCandidato() {

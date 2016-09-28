@@ -29,8 +29,12 @@ public class Votavel {
         this.NomeUE = entry[4];
         this.CodigoCargo = entry[5];
         this.DescricaoCargo = entry[6];
+    
     }
-
+    
+    public void setAll(String[] entry){
+    }
+    
     public String getAnoEleicao() {
         return AnoEleicao;
     }

@@ -74,6 +74,37 @@ public class Candidatura extends Votavel {
         this.EmailCandidato = entry[45];
     }
     
+    @Override
+    public void setAll(String[] entry){
+        this.NomeCandidato = entry[0];
+        this.SeqCandidato = entry[1];
+        this.NumeroCandidato = entry[2];
+        this.CPFCandidato = entry[3];
+        this.NomeUrnaCandidato = entry[4];
+        this.NumeroPartido = entry[5];
+        this.SiglaPartido = entry[6];
+        this.NomePartido = entry[7];
+        this.CodigoLegenda = entry[8];
+        this.SiglaLegenda = entry[9];
+        this.ComposicaoLegenda = entry[10];
+        this.NomeLegenda = entry[11];
+        this.DescricaoOcupacao = entry[12];
+        this.DataNascimento = entry[13];
+        this.NumTituloEleitoral = entry[14];
+        this.IdadeNaEleicao = entry[15];
+        this.DescricaoSexo = entry[16];
+        this.DescricaoGrauInstrucao = entry[17];
+        this.DescricaoEstadoCivil = entry[18];
+        this.DescricaoCorRaca = entry[19];
+        this.CodigoNacionalidade = entry[20];
+        this.SiglaUFNascimento = entry[21];
+        this.CodigoMunicipioNascimento = entry[22];
+        this.NomeMunicipioNascimento = entry[23];
+        this.DespesaMaximaCampanha = entry[24];
+        this.CodigoTotalizacaoTurno = entry[25];
+        this.EmailCandidato = entry[26];
+    }
+    
     public String getNomeCandidato() {
         return NomeCandidato;
     }

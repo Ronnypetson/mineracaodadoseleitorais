@@ -19,10 +19,11 @@ public class Votacao {
     protected String NomeMunicipio;
     protected String CodigoCargo;
     protected String DescricaoCargo;
+    protected String NumZona;
     
     public Votacao(){
     }
-    
+
     public Votacao(String[] entry) {
         this.AnoEleicao = entry[0];
         this.NumTurno = entry[1];
@@ -33,6 +34,18 @@ public class Votacao {
         this.NomeMunicipio = entry[6];
         this.CodigoCargo = entry[7];
         this.DescricaoCargo = entry[8];
+        //this.NumZona = entry[9];
+    }
+    
+    public void setAll(String[] entry){
+    }
+    
+    public String getNumZona() {
+        return NumZona;
+    }
+
+    public void setNumZona(String NumZona) {
+        this.NumZona = NumZona;
     }
     
     public String getAnoEleicao() {
