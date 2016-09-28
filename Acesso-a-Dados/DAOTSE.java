@@ -315,7 +315,7 @@ public class DAOTSE {
         return perfis;
     }
     
-    public ArrayList getVotacaoCandidatoPorMunicipio(String candidato) throws SQLException{
+    public ArrayList getVotacaoCandidatoPorZonaMunicipio(String candidato) throws SQLException{
         candidato = candidato.toUpperCase();
         query = String.format("SELECT * FROM VotacaoCandidato"
                     + " WHERE CAST( VotacaoCandidato.NomeCandidato AS VARCHAR(128) ) LIKE '\"%s\"' "
