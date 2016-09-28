@@ -315,10 +315,36 @@ public class DAOTSE {
         return perfis;
     }
     
+    public ArrayList getPerfisCandidaturasZona(String zona) throws SQLException{
+        zona = zona.toUpperCase();
+        query = String.format("SELECT * FROM Candidatura"
+                    + " INNER JOIN VotacaoSecao"
+                    + " ON "
+                    + " CAST( Candidatura.NumeroCandidato AS VARCHAR(128) ) = "
+                    + " CAST( VotacaoSecao.NumeroDoVotavel AS VARCHAR(128) ) "
+                    + " WHERE CAST( VotacaoSecao.NumZona AS VARCHAR(128) ) = '\"%s\"' "
+                    , zona);
+        Statement stmt = dbConnection.createStatement();
+        ResultSet results = stmt.executeQuery(query);
+        //
+        ArrayList<Candidatura> perfis = new ArrayList<>();
+        int columnCount = results.getMetaData().getColumnCount();
+        while(results.next()){
+            Candidatura perf = new Candidatura();
+            String entry[] = new String[columnCount];
+            for(int i = 0; i < columnCount; i++){
+                entry[i] = results.getString(i+1);
+            }
+            perf.setAll(entry);
+            perfis.add(perf);
+        }
+        return perfis;
+    }
+    
     public ArrayList getVotacaoCandidatoPorZonaMunicipio(String candidato) throws SQLException{
         candidato = candidato.toUpperCase();
         query = String.format("SELECT * FROM VotacaoCandidato"
-                    + " WHERE CAST( VotacaoCandidato.NomeCandidato AS VARCHAR(128) ) LIKE '\"%s\"' "
+                    + " WHERE CAST( VotacaoCandidato.NomeCandidato AS VARCHAR(128) ) = '\"%s\"' "
                     , candidato);
         Statement stmt = dbConnection.createStatement();
         ResultSet results = stmt.executeQuery(query);
@@ -327,6 +353,32 @@ public class DAOTSE {
         int columnCount = results.getMetaData().getColumnCount();
         while(results.next()){
             VotacaoCandidato perf = new VotacaoCandidato();
+            String entry[] = new String[columnCount];
+            for(int i = 0; i < columnCount; i++){
+                entry[i] = results.getString(i+1);
+            }
+            perf.setAll(entry);
+            perfis.add(perf);
+        }
+        return perfis;
+    }
+    
+    public ArrayList getBensDeCandidato(String candidato) throws SQLException{
+        candidato = candidato.toUpperCase();
+        query = String.format(
+                "SELECT * FROM BemDeCandidato"
+                    + " WHERE "
+                + " (SELECT MIN (CAST( SeqCandidato AS VARCHAR(128))) from Candidatura"
+                + " WHERE CAST(Candidatura.NomeCandidato AS VARCHAR(128)) = '\"%s\"')"
+                + " = CAST( BemDeCandidato.SeqCandidato AS VARCHAR(128)) "
+                    , candidato);
+        Statement stmt = dbConnection.createStatement();
+        ResultSet results = stmt.executeQuery(query);
+        //
+        ArrayList<BemDeCandidato> perfis = new ArrayList<>();
+        int columnCount = results.getMetaData().getColumnCount();
+        while(results.next()){
+            BemDeCandidato perf = new BemDeCandidato();
             String entry[] = new String[columnCount];
             for(int i = 0; i < columnCount; i++){
                 entry[i] = results.getString(i+1);
