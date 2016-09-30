@@ -36,7 +36,7 @@ public class ComparaCandidatoEleitor implements ActionListener {
 			
 			dao.disconnect();
 			
-			Vector<String> output = new Vector<>();
+			Vector<String> output = new Vector<String>();
 			for (Candidatura cand : candidaturas) {
 				String s = cand.getNomeCandidato()
 							+ " | " + cand.getDescricaoSexo()
@@ -49,7 +49,7 @@ public class ComparaCandidatoEleitor implements ActionListener {
 			}
 			candidatoList.setListData(output);
 			
-			output = new Vector<>();
+			output = new Vector<String>();
 			for (Candidatura cand : candidaturas) {
 				String s = cand.getNomeCandidato()
 							+ " | " + cand.getDescricaoSexo()
@@ -62,7 +62,7 @@ public class ComparaCandidatoEleitor implements ActionListener {
 			}
 			eleitoradoList.setListData(output);
 			
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e1) {
+		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
