@@ -12,7 +12,7 @@ public class CandidaturaFileTableReader extends FileTableReader {
 
     public CandidaturaFileTableReader() throws IOException {
         super(TABLE_PATH);
-        rows = new ArrayList<>();
+        rows = new ArrayList<Candidatura>();
         this.columns = new String[27];
         columns[0] = "NOMECANDIDATO";
         columns[1] = "SEQCANDIDATO";

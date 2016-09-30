@@ -13,7 +13,7 @@ public class BemDeCandidatoFileTableReader extends FileTableReader {
 	
 	public BemDeCandidatoFileTableReader() throws IOException {
 		super(TABLE_PATH);
-		rows = new ArrayList<>();
+		rows = new ArrayList<BemDeCandidato>();
                 this.columns = new String[8];
                 columns[0] = "ANOELEICAO";
                 columns[1] = "DESCRICAOELEICAO";

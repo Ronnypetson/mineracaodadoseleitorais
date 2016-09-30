@@ -13,7 +13,7 @@ public class LegendaFileTableReader extends FileTableReader {
     
     public LegendaFileTableReader() throws IOException {
         super(TABLE_PATH);
-        rows = new ArrayList<>();
+        rows = new ArrayList<Legenda>();
         this.columns = new String[7];
         columns[0] = "TIPOLEGENDA";
         columns[1] = "NUMEROPARTIDO";

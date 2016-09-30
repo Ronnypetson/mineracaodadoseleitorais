@@ -230,7 +230,7 @@ public class DAOTSE {
         Statement stmt = dbConnection.createStatement();
         ResultSet results = stmt.executeQuery(query);
         //
-        ArrayList<PerfilEleitor> perfis = new ArrayList<>();
+        ArrayList<PerfilEleitor> perfis = new ArrayList<PerfilEleitor>();
         int columnCount = results.getMetaData().getColumnCount();
         while(results.next()){
             PerfilEleitor perf = new PerfilEleitor();
@@ -260,7 +260,7 @@ public class DAOTSE {
         Statement stmt = dbConnection.createStatement();
         ResultSet results = stmt.executeQuery(query);
         //
-        ArrayList<PerfilEleitor> perfis = new ArrayList<>();
+        ArrayList<PerfilEleitor> perfis = new ArrayList<PerfilEleitor>();
         int columnCount = results.getMetaData().getColumnCount();
         while(results.next()){
             PerfilEleitor perf = new PerfilEleitor();
@@ -286,7 +286,7 @@ public class DAOTSE {
         Statement stmt = dbConnection.createStatement();
         ResultSet results = stmt.executeQuery(query);
         //
-        ArrayList<String[]> entries = new ArrayList<>();
+        ArrayList<String[]> entries = new ArrayList<String[]>();
         int columnCount = results.getMetaData().getColumnCount();
         while(results.next()){
             String entry[] = new String[columnCount];
@@ -304,7 +304,7 @@ public class DAOTSE {
 			}
         });
         
-        ArrayList<Candidatura> perfis = new ArrayList<>();
+        ArrayList<Candidatura> perfis = new ArrayList<Candidatura>();
         for (String[] entry : entries) {
         	Candidatura cand = new Candidatura();
         	cand.setAll(entry);
@@ -326,7 +326,7 @@ public class DAOTSE {
         Statement stmt = dbConnection.createStatement();
         ResultSet results = stmt.executeQuery(query);
         //
-        ArrayList<Candidatura> perfis = new ArrayList<>();
+        ArrayList<Candidatura> perfis = new ArrayList<Candidatura>();
         int columnCount = results.getMetaData().getColumnCount();
         while(results.next()){
             Candidatura perf = new Candidatura();

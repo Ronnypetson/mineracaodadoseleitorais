@@ -14,7 +14,7 @@ public class PerfilEleitorFileTableReader extends FileTableReader {
     
     public PerfilEleitorFileTableReader() throws IOException {
         super(TABLE_PATH);
-        rows = new ArrayList<>();
+        rows = new ArrayList<PerfilEleitor>();
     }
     
     @Override

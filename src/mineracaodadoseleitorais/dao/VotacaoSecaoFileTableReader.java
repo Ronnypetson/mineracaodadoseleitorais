@@ -13,7 +13,7 @@ public class VotacaoSecaoFileTableReader extends FileTableReader {
 	
 	public VotacaoSecaoFileTableReader() throws IOException {
 		super(TABLE_PATH);
-		rows = new ArrayList<>();
+		rows = new ArrayList<VotacaoSecao>();
 	}
         
 	@Override
