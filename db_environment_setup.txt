@@ -1,0 +1,29 @@
+A Sample Environment Setup
+
+
+First, we need to go through the following steps to tell the project we intend to use Derby:
+
+    Go to the Projects tab.
+    Right-click the project you want and choose Properties.
+    Go to the Libraries tab in the left side of this dialog.
+    Choose the Run tab on the right side of this dialog.
+    Click the Add JAR/Folder button.
+    Locate derby.jar and click Choose.
+        On Mac OS X, this may be found at /Applications/NetBeans/glassfish-v3-prelude/javadb/lib/derby.jar.
+        On Windows in the default Netbeans installation, this may be found at C:\Program Files\Sun\JavaDB\lib\derby.jar.
+        Other possible locations on Windows where the NetBeans installer may have put this driver are:
+            C:\Sun\AppServer\javadb\lib\derby.jar
+            C:\Program Files\glassfish-3.1.1\javadb\lib
+
+Then, we need to set up the client for Derby by creating a library for it and adding it to the project:
+
+    Go to Tools > Libraries.
+    Select New Library... in the lower left of this dialog.
+    Enter a Library Name of JavaDB-Network, then choose Add JAR/Folder and browse to find derbyclient.jar. (Look to the same directory location as above.)
+    Then go back to the Projects tab.
+    Right-click the project you want and choose Properties.
+    Go to the Libraries tab in the left side of this dialog.
+    Choose the Compile tab on the right side of this dialog this time.
+    Click the Add Library button
+    Locate the JavaDB-Network library you just created.
+    Click OK.
