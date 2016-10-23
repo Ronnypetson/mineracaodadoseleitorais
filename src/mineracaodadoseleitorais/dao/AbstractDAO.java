@@ -25,5 +25,4 @@ public interface AbstractDAO {
     void insertAllPerfilEleitor() throws SQLException, IOException;
     void insertAllVotacaoCandidato() throws SQLException, IOException;
     void insertAllVotacaoPartido() throws SQLException, IOException;
-    void insertAllVotacaoSecao() throws SQLException, IOException;
 }
