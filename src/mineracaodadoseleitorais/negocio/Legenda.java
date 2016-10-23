@@ -13,9 +13,6 @@ import java.util.Arrays;
  */
 public class Legenda extends Votavel {
     private String TipoLegenda;
-    private String NumeroPartido;
-    private String SiglaPartido;
-    private String NomePartido;
     private String SiglaColigacao;
     private String NomeColigacao;
     private String ComposicaoColigacao;
@@ -50,30 +47,6 @@ public class Legenda extends Votavel {
 
     public void setTipoLegenda(String TipoLegenda) {
         this.TipoLegenda = TipoLegenda;
-    }
-
-    public String getNumeroPartido() {
-        return NumeroPartido;
-    }
-
-    public void setNumeroPartido(String NumeroPartido) {
-        this.NumeroPartido = NumeroPartido;
-    }
-
-    public String getSiglaPartido() {
-        return SiglaPartido;
-    }
-
-    public void setSiglaPartido(String SiglaPartido) {
-        this.SiglaPartido = SiglaPartido;
-    }
-
-    public String getNomePartido() {
-        return NomePartido;
-    }
-
-    public void setNomePartido(String NomePartido) {
-        this.NomePartido = NomePartido;
     }
 
     public String getSiglaColigacao() {

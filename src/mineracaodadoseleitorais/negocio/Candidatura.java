@@ -17,9 +17,6 @@ public class Candidatura extends Votavel {
     private String NumeroCandidato;
     private String CPFCandidato;
     private String NomeUrnaCandidato;
-    private String NumeroPartido;
-    private String SiglaPartido;
-    private String NomePartido;
     private String CodigoLegenda;
     private String SiglaLegenda;
     private String ComposicaoLegenda;
@@ -143,30 +140,6 @@ public class Candidatura extends Votavel {
 
     public void setNomeUrnaCandidato(String NomeUrnaCandidato) {
         this.NomeUrnaCandidato = NomeUrnaCandidato;
-    }
-
-    public String getNumeroPartido() {
-        return NumeroPartido;
-    }
-
-    public void setNumeroPartido(String NumeroPartido) {
-        this.NumeroPartido = NumeroPartido;
-    }
-
-    public String getSiglaPartido() {
-        return SiglaPartido;
-    }
-
-    public void setSiglaPartido(String SiglaPartido) {
-        this.SiglaPartido = SiglaPartido;
-    }
-
-    public String getNomePartido() {
-        return NomePartido;
-    }
-
-    public void setNomePartido(String NomePartido) {
-        this.NomePartido = NomePartido;
     }
 
     public String getCodigoLegenda() {

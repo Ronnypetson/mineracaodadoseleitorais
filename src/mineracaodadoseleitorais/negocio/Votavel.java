@@ -10,6 +10,7 @@ package mineracaodadoseleitorais.negocio;
  * @author ronnypetsonss
  */
 public class Votavel {
+
     protected String AnoEleicao;
     protected String NumTurno;
     protected String SiglaUF;
@@ -17,6 +18,9 @@ public class Votavel {
     protected String NomeUE;
     protected String CodigoCargo;
     protected String DescricaoCargo;
+    protected String NumeroPartido;
+    protected String SiglaPartido;
+    protected String NomePartido;
 
     public Votavel() {
     }
@@ -29,12 +33,12 @@ public class Votavel {
         this.NomeUE = entry[4];
         this.CodigoCargo = entry[5];
         this.DescricaoCargo = entry[6];
-    
+
     }
-    
-    public void setAll(String[] entry){
+
+    public void setAll(String[] entry) {
     }
-    
+
     public String getAnoEleicao() {
         return AnoEleicao;
     }
@@ -89,5 +93,29 @@ public class Votavel {
 
     public void setDescricaoCargo(String DescricaoCargo) {
         this.DescricaoCargo = DescricaoCargo;
+    }
+    
+    public String getNumeroPartido() {
+        return NumeroPartido;
+    }
+
+    public void setNumeroPartido(String NumeroPartido) {
+        this.NumeroPartido = NumeroPartido;
+    }
+
+    public String getSiglaPartido() {
+        return SiglaPartido;
+    }
+
+    public void setSiglaPartido(String SiglaPartido) {
+        this.SiglaPartido = SiglaPartido;
+    }
+
+    public String getNomePartido() {
+        return NomePartido;
+    }
+
+    public void setNomePartido(String NomePartido) {
+        this.NomePartido = NomePartido;
     }
 }

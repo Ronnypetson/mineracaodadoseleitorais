@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 import javax.swing.JList;
+import javax.swing.JScrollPane;
 
 public class GUI {
 
@@ -64,16 +65,24 @@ public class GUI {
 		JButton btnQuery = new JButton("Query");
 		panel.add(btnQuery);
 		
+                //
 		JPanel panel_1 = new JPanel();
 		frame.getContentPane().add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JList<String> candidatoList = new JList<String>();
-		panel_1.add(candidatoList);
-		
+                //
+                JScrollPane scrollPane = new JScrollPane();
+                JList<String> candidatoList = new JList<String>();
+		scrollPane.setViewportView(candidatoList);
+                panel_1.add(scrollPane);
+                
+		//
 		JList<String> eleitoradoList = new JList<String>();
-		panel_1.add(eleitoradoList);
+                JScrollPane scrollPane2 = new JScrollPane();
+                scrollPane2.setViewportView(eleitoradoList);
+		panel_1.add(scrollPane2);
 		
+                //
 		btnQuery.addActionListener(new ComparaCandidatoEleitor(candidatoList, eleitoradoList));
 	}
 

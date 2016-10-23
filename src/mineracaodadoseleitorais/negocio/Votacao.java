@@ -23,7 +23,7 @@ public class Votacao {
     
     public Votacao(){
     }
-
+    
     public Votacao(String[] entry) {
         this.AnoEleicao = entry[0];
         this.NumTurno = entry[1];
