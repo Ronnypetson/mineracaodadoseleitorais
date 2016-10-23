@@ -15,7 +15,7 @@ import mineracaodadoseleitorais.negocio.*;
  *
  * @author ronnypetsonss
  */
-public class DAOTSE implements AbstractDAO {
+public class DAOTSE implements AbstractElectionDAO {
     
     private Connection dbConnection;
     private final String password = "123";
