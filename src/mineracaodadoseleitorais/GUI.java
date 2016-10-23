@@ -15,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 
 public class GUI {
 
@@ -55,15 +56,18 @@ public class GUI {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 480, 360);
+		frame.setBounds(100, 100, 540, 360);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		
-		JPanel panel = new JPanel();
-		frame.getContentPane().add(panel, BorderLayout.NORTH);
+                //
+                // JPanel mainPanel = new JPanel();
+		// frame.getContentPane().add(mainPanel, BorderLayout.NORTH);
 		
-		JButton btnQuery = new JButton("Query");
-		panel.add(btnQuery);
+                //
+                JTabbedPane tabbedPane = new JTabbedPane();
+		
+                // Criar as abas Perfis, Distribuicao de Votos e Contas e Performance
 		
                 //
 		JPanel panel_1 = new JPanel();
@@ -83,7 +87,14 @@ public class GUI {
 		panel_1.add(scrollPane2);
 		
                 //
+                JButton btnQuery = new JButton("Listar perfis");
+		panel_1.add(btnQuery);
+                
+                //
+                tabbedPane.addTab("Perfis", panel_1);
+                frame.add(tabbedPane);
+                
+                //
 		btnQuery.addActionListener(new ComparaCandidatoEleitor(candidatoList, eleitoradoList));
 	}
-
 }

@@ -50,14 +50,13 @@ public class ComparaCandidatoEleitor implements ActionListener {
 			candidatoList.setListData(output);
 			
 			output = new Vector<String>();
-			for (Candidatura cand : candidaturas) {
-				String s = cand.getNomeCandidato()
-							+ " | " + cand.getDescricaoSexo()
-							+ " | " + cand.getDescricaoCorRaca()
-							+ " | " + cand.getDescricaoEstadoCivil()
-							+ " | " + cand.getDescricaoGrauInstrucao()
-							+ " | " + cand.getDescricaoOcupacao()
-							+ " | " + cand.getDespesaMaximaCampanha();
+			for (PerfilEleitor perf : eleitorado) {
+				String s = perf.getUF()
+                                            + " | " + perf.getMunicipio()
+                                            + " | " + perf.getSexo()
+                                            + " | " + perf.getFaixaEtaria()
+                                            + " | " + perf.getGrauDeEscolaridade()
+                                            + " | " + perf.getQtdNoPerfil();
 				output.add(s);
 			}
 			eleitoradoList.setListData(output);
