@@ -15,7 +15,7 @@ import mineracaodadoseleitorais.negocio.*;
  *
  * @author ronnypetsonss
  */
-public class DAOTSE {
+public class DAOTSE implements AbstractDAO {
     
     private Connection dbConnection;
     private final String password = "123";
@@ -340,7 +340,7 @@ public class DAOTSE {
         return perfis;
     }
     
-    private ResultSet get(String tableName) throws SQLException { // throws SQLException
+    public ResultSet get(String tableName) throws SQLException { // throws SQLException
         query = "select * from " + tableName;
         Statement stmt = dbConnection.createStatement();
         ResultSet results = stmt.executeQuery(query);
@@ -361,7 +361,7 @@ public class DAOTSE {
         }
     }
     
-    private void printGet(ResultSet results) throws SQLException {
+    public void printGet(ResultSet results) throws SQLException {
         int columnCount = results.getMetaData().getColumnCount();
         while (results.next()) { // results.toString()
             for(int i = 1; i <= columnCount; i++){

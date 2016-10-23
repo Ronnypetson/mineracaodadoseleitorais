@@ -35,7 +35,7 @@ public class GUI {
 			}
 		});
 	}
-
+        
 	/**
 	 * Create the application.
 	 * @throws IllegalAccessException 
