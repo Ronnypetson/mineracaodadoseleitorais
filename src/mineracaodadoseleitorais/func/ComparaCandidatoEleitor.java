@@ -56,6 +56,7 @@ public class ComparaCandidatoEleitor implements ActionListener {
                                             + " | " + perf.getSexo()
                                             + " | " + perf.getFaixaEtaria()
                                             + " | " + perf.getGrauDeEscolaridade()
+                                            + " | " + perf.getNumZona()
                                             + " | " + perf.getQtdNoPerfil();
 				output.add(s);
 			}

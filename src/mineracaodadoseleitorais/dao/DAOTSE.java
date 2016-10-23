@@ -246,7 +246,7 @@ public class DAOTSE implements AbstractElectionDAO {
 			public int compare(PerfilEleitor o1, PerfilEleitor o2) {
 				int a = Integer.parseInt(o1.getQtdNoPerfil().replaceAll("[\\D]", ""));
 				int b = Integer.parseInt(o2.getQtdNoPerfil().replaceAll("[\\D]", ""));
-				return Integer.compare(a, b);
+				return Integer.compare(b, a);
 			}
 		});	
         		
@@ -300,7 +300,7 @@ public class DAOTSE implements AbstractElectionDAO {
 			public int compare(String[] arg0, String[] arg1) {
 				int a = Integer.parseInt(arg0[43].replaceAll("[\\D]", ""));
 				int b = Integer.parseInt(arg1[43].replaceAll("[\\D]", ""));
-				return Integer.compare(a, b);
+				return Integer.compare(b, a);
 			}
         });
         
