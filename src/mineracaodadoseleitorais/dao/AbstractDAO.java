@@ -5,6 +5,7 @@
  */
 package mineracaodadoseleitorais.dao;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -19,4 +20,10 @@ public interface AbstractDAO {
     ResultSet get(String tableName) throws SQLException;
     void printGet(String tableName) throws SQLException;
     void printGet(ResultSet results) throws SQLException;
+    void insertAllCandidatura() throws SQLException, IOException;
+    void insertAllLegenda() throws SQLException, IOException;
+    void insertAllPerfilEleitor() throws SQLException, IOException;
+    void insertAllVotacaoCandidato() throws SQLException, IOException;
+    void insertAllVotacaoPartido() throws SQLException, IOException;
+    void insertAllVotacaoSecao() throws SQLException, IOException;
 }
