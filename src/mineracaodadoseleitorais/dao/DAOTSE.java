@@ -314,6 +314,53 @@ public class DAOTSE implements AbstractElectionDAO {
         return perfis;
     }
     
+    public ArrayList<VotacaoCandidato> getVotacaoCandidatos(String municipio) throws SQLException{
+        municipio = municipio.toUpperCase();
+        query = String.format("SELECT * FROM VotacaoCandidato"
+                    + " INNER JOIN Candidatura"
+                    + " ON "
+                    + " CAST( Candidatura.SeqCandidato AS VARCHAR(128) ) = "
+                    + " CAST( VotacaoCandidato.SeqCandidato AS VARCHAR(128) ) "
+                    + " WHERE CAST( VotacaoCandidato.NomeMunicipio AS VARCHAR(128) ) = '\"%s\"' "
+                    , municipio);
+        Statement stmt = dbConnection.createStatement();
+        ResultSet results = stmt.executeQuery(query);
+        //
+        ArrayList<String[]> entries = new ArrayList<String[]>();
+        int columnCount = results.getMetaData().getColumnCount();
+        while(results.next()){
+            String entry[] = new String[columnCount];
+            for(int i = 0; i < columnCount; i++){
+                entry[i] = results.getString(i+1);
+            }
+            entries.add(entry);
+        }
+        entries.sort(new Comparator<String[]>() {
+			@Override
+			public int compare(String[] arg0, String[] arg1) {
+				int a = Integer.parseInt(arg0[20].replaceAll("[\\D]", ""));
+				int b = Integer.parseInt(arg1[20].replaceAll("[\\D]", ""));
+                                
+                                int c = Integer.parseInt(arg0[15].replaceAll("[\\D]", ""));
+				int d = Integer.parseInt(arg1[15].replaceAll("[\\D]", ""));
+                                
+                                if(a == b)
+                                    return Integer.compare(d, c);
+                                else
+                                    return Integer.compare(a, b);
+			}
+        });
+        
+        ArrayList<VotacaoCandidato> perfis = new ArrayList<VotacaoCandidato>();
+        for (String[] entry : entries) {
+        	VotacaoCandidato cand = new VotacaoCandidato();
+        	cand.setAll(entry);
+        	perfis.add(cand);
+        }
+        
+        return perfis;
+    }
+    
     public ArrayList<Candidatura> getPerfisCandidaturasSecao(String secao) throws SQLException{
         secao = secao.toUpperCase();
         query = String.format("SELECT * FROM Candidatura"
