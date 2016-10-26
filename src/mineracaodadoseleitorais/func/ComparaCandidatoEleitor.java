@@ -1,8 +1,6 @@
 package mineracaodadoseleitorais.func;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -12,14 +10,14 @@ import mineracaodadoseleitorais.dao.DAOTSE;
 import mineracaodadoseleitorais.negocio.Candidatura;
 import mineracaodadoseleitorais.negocio.PerfilEleitor;
 
-public class ComparaCandidatoEleitor implements ActionListener {
+public class ComparaCandidatoEleitor implements ComparadorAbstratoCandidatoEleitor {
 	
 	private JList<String> candidatoList;
 	private JList<String> eleitoradoList;
 	
 	public ComparaCandidatoEleitor(JList<String> candidatoList, JList<String> eleitoradoList) {
-		this.candidatoList = candidatoList;
-		this.eleitoradoList = eleitoradoList;
+            this.candidatoList = candidatoList;
+            this.eleitoradoList = eleitoradoList;
 	}
 	
 	@Override
@@ -67,4 +65,17 @@ public class ComparaCandidatoEleitor implements ActionListener {
 			e1.printStackTrace();
 		}
 	}
+
+    public void setGraficoCandidato(String nomeMunicipio) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void setGraficoEleitor(String nomeMunicipio) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void setCorrelacao(String nomeMunicipio) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+        
 }

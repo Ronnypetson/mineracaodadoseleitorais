@@ -8,7 +8,6 @@ package mineracaodadoseleitorais;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JList;
 import mineracaodadoseleitorais.dao.DAOTSE;
 import mineracaodadoseleitorais.func.ComparaCandidatoEleitor;
 import mineracaodadoseleitorais.func.DistribuicaoVotos;

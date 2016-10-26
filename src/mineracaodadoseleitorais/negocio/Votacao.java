@@ -9,16 +9,12 @@ package mineracaodadoseleitorais.negocio;
  *
  * @author ronnypetsonss
  */
-public class Votacao {
-    protected String AnoEleicao;
-    protected String NumTurno;
-    protected String DescricaoEleicao;
+public class Votacao extends AbstractVotacao {
     protected String SiglaUF;
     protected String SigaUE;
     protected String CodigoMunicipio;
     protected String NomeMunicipio;
     protected String CodigoCargo;
-    protected String DescricaoCargo;
     protected String NumZona;
     
     public Votacao(){

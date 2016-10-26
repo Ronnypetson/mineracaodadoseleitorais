@@ -9,15 +9,11 @@ package mineracaodadoseleitorais.negocio;
  *
  * @author ronnypetsonss
  */
-public class BemDeCandidato {
-    private String AnoEleicao;
-    private String DescricaoEleicao;
+public class BemDeCandidato extends AbstractBemDeCandidato {
     private String SiglaUF;
     private String SeqCandidato;
     private String CodigoTipoDeBem;
-    private String DescricaoTipoDeBem;
     private String DetalheBem;
-    private String ValorBem;
     
     public BemDeCandidato() {
     }

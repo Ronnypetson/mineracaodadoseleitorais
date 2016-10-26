@@ -3,18 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mineracaodadoseleitorais.dao;
-
-import java.sql.SQLException;
+package mineracaodadoseleitorais.negocio;
 
 /**
  *
  * @author ronnypetsonss
  */
-public interface AbstractElectionDAO {
-    
-    void connect() throws SQLException;
-    
-    void disconnect() throws SQLException;
-    
+public abstract class AbstractVotacao {
+    protected String AnoEleicao;
+    protected String NumTurno;
+    protected String DescricaoEleicao;
+    protected String DescricaoCargo;
 }

@@ -9,15 +9,12 @@ package mineracaodadoseleitorais.negocio;
  *
  * @author ronnypetsonss
  */
-public class Votavel {
+public class Votavel extends AbstractVotavel {
 
-    protected String AnoEleicao;
-    protected String NumTurno;
     protected String SiglaUF;
     protected String SiglaUE;
     protected String NomeUE;
     protected String CodigoCargo;
-    protected String DescricaoCargo;
     protected String NumeroPartido;
     protected String SiglaPartido;
     protected String NomePartido;

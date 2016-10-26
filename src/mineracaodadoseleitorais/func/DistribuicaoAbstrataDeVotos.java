@@ -3,18 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mineracaodadoseleitorais.dao;
-
-import java.sql.SQLException;
+package mineracaodadoseleitorais.func;
 
 /**
  *
  * @author ronnypetsonss
  */
-public interface AbstractElectionDAO {
+public interface DistribuicaoAbstrataDeVotos {
     
-    void connect() throws SQLException;
+    public void setMapaDeDistribuicao(String nomeCandidato);
     
-    void disconnect() throws SQLException;
+    public void setGraficoDeDistribuicao(String nomeCandidato);
     
 }

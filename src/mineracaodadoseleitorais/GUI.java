@@ -10,8 +10,6 @@ import javax.swing.JPanel;
 import mineracaodadoseleitorais.dao.DAOTSE;
 import mineracaodadoseleitorais.func.ComparaCandidatoEleitor;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 import javax.swing.JList;
 import javax.swing.JScrollPane;

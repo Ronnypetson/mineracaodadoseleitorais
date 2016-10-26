@@ -9,16 +9,12 @@ package mineracaodadoseleitorais.negocio;
  *
  * @author ronnypetsonss
  */
-public class PerfilEleitor {
+public class PerfilEleitor extends AbstractPerfilEleitor {
     private String Periodo;
     private String UF;
     private String Municipio;
     private String CodigoMunicipioTSE;
     private String NumZona;
-    private String Sexo;
-    private String FaixaEtaria;
-    private String GrauDeEscolaridade;
-    private String QtdNoPerfil;
     
     public PerfilEleitor() {
     }
