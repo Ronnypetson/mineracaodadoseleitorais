@@ -5,16 +5,37 @@
  */
 package mineracaodadoseleitorais.dao;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
  * @author ronnypetsonss
  */
-public interface AbstractElectionDAO {
+public abstract class AbstractElectionDAO {
     
-    void connect() throws SQLException;
+    protected Connection dbConnection;
+    protected String password;
+    protected String dbURL;
+    protected String userName;
     
-    void disconnect() throws SQLException;
+    public void connect() throws SQLException {
+        dbConnection
+                = DriverManager.getConnection(dbURL, userName, password);
+    }
     
+    public void disconnect() throws SQLException {
+        // stmt.close();
+        dbConnection.close();
+    }
+    
+    // Delete
+    public void clearTable(String tableName) throws SQLException {
+        String query = "delete from " + tableName + " where true";
+        Statement stmt = dbConnection.createStatement();
+        stmt.execute(query);
+        stmt.close();
+    }
 }

@@ -15,28 +15,29 @@ import mineracaodadoseleitorais.negocio.*;
  *
  * @author ronnypetsonss
  */
-public class DAOTSE implements AbstractElectionDAO {
+public class DAOTSE extends AbstractElectionDAO {
     
-    private Connection dbConnection;
-    private final String password = "123";
-    private final String dbURL = "jdbc:derby://localhost:1527/db_test1";
-    private final String userName = "ronny";
     private String query;
     private Statement stmt;
     
     public DAOTSE() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance(); // Client
+        password = "123";
+        dbURL = "jdbc:derby://localhost:1527/db_test1";
+        userName = "ronny";
     }
     
+    /* @Override
     public void connect() throws SQLException {
         dbConnection
                 = DriverManager.getConnection(dbURL, userName, password);
-    }
+    } */
     
+    /* @Override
     public void disconnect() throws SQLException {
         // stmt.close();
         dbConnection.close();
-    }
+    } */
     
     // Inserts
     public void insertAllBemDeCandidato() throws SQLException, IOException {
@@ -212,14 +213,6 @@ public class DAOTSE implements AbstractElectionDAO {
             stmt.close();
         } catch (IOException e) {
         }
-    }
-    
-    // Delete
-    public void clearTable(String tableName) throws SQLException {
-        query = "delete from " + tableName + " where true";
-        Statement stmt = dbConnection.createStatement();
-        stmt.execute(query);
-        stmt.close();
     }
     
     // Query
