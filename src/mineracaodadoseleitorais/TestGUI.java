@@ -59,9 +59,14 @@ public class TestGUI extends javax.swing.JFrame {
         TurnoComboBox = new javax.swing.JComboBox();
         jPanel2 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
-        tfMunicipio = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
-        votacaoList = new javax.swing.JList();
+        DistribuicaoVotosTable = new javax.swing.JTable();
+        jLabel6 = new javax.swing.JLabel();
+        CargoDistTxt = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        TurnoDComboBox = new javax.swing.JComboBox();
         jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -107,7 +112,7 @@ public class TestGUI extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7"
+                "UF", "Município", "Sexo", "Faixa Etária", "Grau de Instrução", "Zona Eleitoral", "Quantidade no Perfil"
             }
         ) {
             Class[] types = new Class [] {
@@ -194,22 +199,49 @@ public class TestGUI extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Perfis", jPanel1);
 
-        jButton2.setText("Votos no município");
+        jButton2.setText("Exibir Distribuição");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
-        tfMunicipio.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        tfMunicipio.setText("Natal");
+        DistribuicaoVotosTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        votacaoList.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, true, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
-        jScrollPane3.setViewportView(votacaoList);
+        jScrollPane3.setViewportView(DistribuicaoVotosTable);
+
+        jLabel6.setText("Cargo");
+
+        CargoDistTxt.setText("Senador");
+
+        jLabel7.setText("Região");
+
+        jTextField1.setText("RN");
+
+        jLabel8.setText("Turno");
+
+        TurnoDComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -218,24 +250,38 @@ public class TestGUI extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 155, Short.MAX_VALUE)))
+                        .addComponent(CargoDistTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(TurnoDComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(tfMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 518, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(399, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(CargoDistTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addComponent(TurnoDComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2))
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Distribuição de Votos", jPanel2);
@@ -285,7 +331,7 @@ public class TestGUI extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        new DistribuicaoVotos(votacaoList, this.tfMunicipio.getText()).actionPerformed(evt);
+        new DistribuicaoVotos(this.DistribuicaoVotosTable, this.RegiaoTextField.getText()).actionPerformed(evt);
     }//GEN-LAST:event_jButton2ActionPerformed
     
     /**
@@ -336,24 +382,29 @@ public class TestGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane CandidatosScrollPanel;
     private javax.swing.JTable CandidatosTable;
+    private javax.swing.JTextField CargoDistTxt;
     private javax.swing.JTextField CargoTextField;
+    private javax.swing.JTable DistribuicaoVotosTable;
     private javax.swing.JScrollPane EleitoresScrollPanel;
     private javax.swing.JTable EleitoresTable;
     private javax.swing.JButton ListarPerfisButton;
     private javax.swing.JTextField RegiaoTextField;
     private javax.swing.JComboBox TurnoComboBox;
+    private javax.swing.JComboBox TurnoDComboBox;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField tfMunicipio;
-    private javax.swing.JList votacaoList;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

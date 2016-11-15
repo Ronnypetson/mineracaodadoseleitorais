@@ -229,8 +229,48 @@ public class DAOTSE extends AbstractElectionDAO {
     }
     
     // Query
+    public ArrayList<PerfilEleitor> getPerfisEleitores(String regiao) throws SQLException {
+        regiao = regiao.toUpperCase();
+        String condition;
+        if(this.UF.contains(regiao)){
+            condition = " CAST( UF AS VARCHAR(128) ) = " + "'\"" + regiao + "\"'";
+        } else {
+            condition = " CAST( Municipio AS VARCHAR(128) ) = " + "'\"" + regiao + "\"'";
+        }
+        query = String.format("select * from PerfilEleitor"
+                        + " where " + condition, regiao);
+        Statement select = dbConnection.createStatement();
+        ResultSet results = select.executeQuery(query);
+        //
+        ArrayList<PerfilEleitor> perfis = new ArrayList<PerfilEleitor>();
+        int columnCount = results.getMetaData().getColumnCount();
+        while (results.next()) {
+            PerfilEleitor perf = new PerfilEleitor();
+            String entry[] = new String[columnCount];
+            for (int i = 0; i < columnCount; i++) {
+                entry[i] = results.getString(i + 1);
+            }
+            perf.setAll(entry);
+            perfis.add(perf);
+        }
+        perfis.sort(new Comparator<PerfilEleitor>() {
+            @Override
+            public int compare(PerfilEleitor o1, PerfilEleitor o2) {
+                int a = Integer.parseInt(o1.getQtdNoPerfil().replaceAll("[\\D]", ""));
+                int b = Integer.parseInt(o2.getQtdNoPerfil().replaceAll("[\\D]", ""));
+                return Integer.compare(b, a);
+            }
+        });
+
+        return perfis;
+    }
+
     public ArrayList<PerfilEleitor> getPerfisEleitoresMunicipio(String municipio) throws SQLException {
         municipio = municipio.toUpperCase();
+        /* String condition;
+        if(this.UF.contains(municipio)){
+            condition = 
+        } */
         query = String.format("select * from PerfilEleitor"
                         + " where CAST( Municipio AS VARCHAR(128) ) = '\"%s\"' ", municipio);
         Statement select = dbConnection.createStatement();
@@ -285,11 +325,12 @@ public class DAOTSE extends AbstractElectionDAO {
         //
         String localidade;
         if(this.UF.contains(regiao)){
-            localidade = " "; // Sigla uf
+            localidade = " AND CAST( VotacaoCandidato.SiglaUF AS VARCHAR(128) ) = "
+                    + "'\"" + regiao + "\"'";
         } else {
             localidade
                 = " AND CAST( VotacaoCandidato.NomeMunicipio AS VARCHAR(128) ) = "
-                    + "'" + regiao + "'";
+                    + "'\"" + regiao + "\"'";
         }
         //
         query =   " SELECT * FROM Candidatura"
@@ -297,17 +338,9 @@ public class DAOTSE extends AbstractElectionDAO {
                 + " ON "
                 + " CAST( Candidatura.SeqCandidato AS VARCHAR(128) ) = "
                 + " CAST( VotacaoCandidato.SeqCandidato AS VARCHAR(128) ) "
-                + " WHERE CAST( CANDIDATURA.DESCRICAOCARGO AS VARCHAR(128) ) = "
-                + "'" + cargo + "'"
-                + localidade
-                + " UNION ALL "
-                + " SELECT * FROM Candidatura"
-                + " RIGHT JOIN VotacaoCandidato"
-                + " ON "
-                + " CAST( Candidatura.SeqCandidato AS VARCHAR(128) ) = "
-                + " CAST( VotacaoCandidato.SeqCandidato AS VARCHAR(128) ) "
-                + " WHERE CAST( CANDIDATURA.DESCRICAOCARGO AS VARCHAR(128) ) = "
-                + "'" + cargo + "'"
+                + " WHERE "
+                + " CAST( CANDIDATURA.DESCRICAOCARGO AS VARCHAR(128) ) = "
+                + " '\"" + cargo + "\"'"
                 + localidade;
         //
         Statement select = dbConnection.createStatement();
@@ -322,6 +355,8 @@ public class DAOTSE extends AbstractElectionDAO {
             }
             entries.add(entry);
         }
+        //
+        // Somar os votos
         //
         entries.sort(new Comparator<String[]>() {
             @Override
