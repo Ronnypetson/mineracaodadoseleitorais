@@ -64,7 +64,7 @@ public class TestGUI extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         CargoDistTxt = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        RegiaoDistTxt = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         TurnoDComboBox = new javax.swing.JComboBox();
         jPanel3 = new javax.swing.JPanel();
@@ -211,14 +211,14 @@ public class TestGUI extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Title 1", "Title 2", "Title 3", "Title 4", "null", "null", "null", "null", "null", "null"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, true, true
+                false, false, false, false, false, false, false, false, true, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -237,7 +237,7 @@ public class TestGUI extends javax.swing.JFrame {
 
         jLabel7.setText("Região");
 
-        jTextField1.setText("RN");
+        RegiaoDistTxt.setText("RN");
 
         jLabel8.setText("Turno");
 
@@ -258,7 +258,7 @@ public class TestGUI extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(RegiaoDistTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -277,7 +277,7 @@ public class TestGUI extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(CargoDistTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(RegiaoDistTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
                     .addComponent(TurnoDComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2))
@@ -331,7 +331,11 @@ public class TestGUI extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        new DistribuicaoVotos(this.DistribuicaoVotosTable, this.RegiaoTextField.getText()).actionPerformed(evt);
+        new DistribuicaoVotos(this.DistribuicaoVotosTable,
+                this.RegiaoDistTxt.getText(),
+                this.CargoDistTxt.getText(),
+                (String)this.TurnoDComboBox.getSelectedItem()
+                ).actionPerformed(evt);
     }//GEN-LAST:event_jButton2ActionPerformed
     
     /**
@@ -388,6 +392,7 @@ public class TestGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane EleitoresScrollPanel;
     private javax.swing.JTable EleitoresTable;
     private javax.swing.JButton ListarPerfisButton;
+    private javax.swing.JTextField RegiaoDistTxt;
     private javax.swing.JTextField RegiaoTextField;
     private javax.swing.JComboBox TurnoComboBox;
     private javax.swing.JComboBox TurnoDComboBox;
@@ -405,6 +410,5 @@ public class TestGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

@@ -9,10 +9,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JList;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import mineracaodadoseleitorais.dao.DAOTSE;
 import mineracaodadoseleitorais.negocio.VotacaoCandidato;
 
@@ -22,12 +22,18 @@ import mineracaodadoseleitorais.negocio.VotacaoCandidato;
  */
 public class DistribuicaoVotos implements ActionListener {
     
-    private JList<String> votosPorSecaoMunicipio;
-    private String municipio;
+    private JTable votosPorSecaoMunicipio;
+    private String regiao;
+    private String cargo;
+    private String turno;
+    private DefaultTableModel distTableModel;
     
-    public DistribuicaoVotos(JList<String> votacao, String municipio){
+    public DistribuicaoVotos(JTable votacao, String regiao, String cargo, String turno){
         votosPorSecaoMunicipio = votacao;
-        this.municipio = municipio;
+        this.regiao = regiao;
+        this.cargo = cargo;
+        this.turno = turno;
+        distTableModel = (DefaultTableModel) votacao.getModel();
     }
     
     @Override
@@ -37,23 +43,22 @@ public class DistribuicaoVotos implements ActionListener {
         try{
             daoTSE = new DAOTSE();
             daoTSE.connect();
-            votacao = daoTSE.getVotacaoCandidatos(this.municipio);
+            votacao = daoTSE.getVotacaoCandidatos(this.regiao);
             daoTSE.disconnect();
-            Vector<String> output = new Vector<String>();
-            for (VotacaoCandidato cand : votacao) {
-                    String s = cand.getNomeCandidato()
-                                + " | " + cand.getComposicaoLegenda()
-                                + " | " + cand.getSiglaPartido()
-                                + " | " + cand.getDescricaoCargo()
-                                + " | " + cand.getNomeCandidato()
-                                + " | " + cand.getNomeMunicipio()
-                                + " | " + cand.getNomeUrnaCandidato()
-                                + " | " + cand.getNumZona()
-                                + " | " + cand.getSiglaUF()
-                                + " | " + cand.getTotalVotos();
-                    output.add(s);
+            //
+            for (VotacaoCandidato vc : votacao) {
+                    String r[] = { vc.getNomeCandidato(),
+                                vc.getComposicaoLegenda(),
+                                vc.getSiglaPartido(),
+                                vc.getDescricaoCargo(),
+                                vc.getNomeCandidato(),
+                                vc.getNomeMunicipio(),
+                                vc.getNomeUrnaCandidato(),
+                                vc.getNumZona(),
+                                vc.getSiglaUF(),
+                                vc.getTotalVotos() };
+                    this.distTableModel.addRow(r);
             }
-            votosPorSecaoMunicipio.setListData(output);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DistribuicaoVotos.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
