@@ -9,36 +9,40 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeSet;
 
 import mineracaodadoseleitorais.negocio.*;
+
 /**
  *
  * @author ronnypetsonss
  */
 public class DAOTSE extends AbstractElectionDAO {
-    
+
     private String query;
     private Statement stmt;
-    
+
     public DAOTSE() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance(); // Client
         password = "123";
         dbURL = "jdbc:derby://localhost:1527/db_test1";
         userName = "ronny";
     }
-    
+
     /* @Override
-    public void connect() throws SQLException {
-        dbConnection
-                = DriverManager.getConnection(dbURL, userName, password);
-    } */
-    
+     public void connect() throws SQLException {
+     dbConnection
+     = DriverManager.getConnection(dbURL, userName, password);
+     } */
     /* @Override
-    public void disconnect() throws SQLException {
-        // stmt.close();
-        dbConnection.close();
-    } */
-    
+     public void disconnect() throws SQLException {
+     // stmt.close();
+     dbConnection.close();
+     } */
     // Inserts
     public void insertAllBemDeCandidato() throws SQLException, IOException {
         BemDeCandidatoFileTableReader ftr = new BemDeCandidatoFileTableReader();
@@ -61,7 +65,7 @@ public class DAOTSE extends AbstractElectionDAO {
         } catch (IOException e) {
         }
     }
-    
+
     public void insertAllCandidatura() throws SQLException, IOException {
         CandidaturaFileTableReader ftr = new CandidaturaFileTableReader();
         try {
@@ -95,7 +99,7 @@ public class DAOTSE extends AbstractElectionDAO {
         } catch (IOException e) {
         }
     }
-    
+
     public void insertAllLegenda() throws SQLException, IOException {
         FileTableReader ftr = new LegendaFileTableReader();
         try {
@@ -117,7 +121,7 @@ public class DAOTSE extends AbstractElectionDAO {
         } catch (IOException e) {
         }
     }
-    
+
     public void insertAllPerfilEleitor() throws SQLException, IOException {
         FileTableReader ftr = new PerfilEleitorFileTableReader();
         try {
@@ -139,7 +143,7 @@ public class DAOTSE extends AbstractElectionDAO {
         } catch (IOException e) {
         }
     }
-    
+
     public void insertAllVotacaoCandidato() throws SQLException, IOException {
         FileTableReader ftr = new VotacaoCandidatoFileTableReader();
         try {
@@ -172,7 +176,7 @@ public class DAOTSE extends AbstractElectionDAO {
         } catch (IOException e) {
         }
     }
-    
+
     public void insertAllVotacaoPartido() throws SQLException, IOException {
         FileTableReader ftr = new VotacaoPartidoFileTableReader();
         try {
@@ -195,7 +199,7 @@ public class DAOTSE extends AbstractElectionDAO {
         } catch (IOException e) {
         }
     }
-    
+
     public void insertAllVotacaoSecao() throws SQLException, IOException {
         FileTableReader ftr = new VotacaoSecaoFileTableReader();
         try {
@@ -215,172 +219,221 @@ public class DAOTSE extends AbstractElectionDAO {
         } catch (IOException e) {
         }
     }
-    
+
     // Query
-    public ArrayList<PerfilEleitor> getPerfisEleitoresMunicipio(String municipio) throws SQLException{
+    public ArrayList<PerfilEleitor> getPerfisEleitoresMunicipio(String municipio) throws SQLException {
+        municipio = municipio.toUpperCase();
         query
-            = String.format("select * from PerfilEleitor"
-                    + " where CAST( Municipio AS VARCHAR(128) ) = '\"%s\"' ", municipio);
-        Statement stmt = dbConnection.createStatement();
-        ResultSet results = stmt.executeQuery(query);
+                = String.format("select * from PerfilEleitor"
+                        + " where CAST( Municipio AS VARCHAR(128) ) = '\"%s\"' ", municipio);
+        Statement select = dbConnection.createStatement();
+        ResultSet results = select.executeQuery(query);
         //
         ArrayList<PerfilEleitor> perfis = new ArrayList<PerfilEleitor>();
         int columnCount = results.getMetaData().getColumnCount();
-        while(results.next()){
+        while (results.next()) {
             PerfilEleitor perf = new PerfilEleitor();
             String entry[] = new String[columnCount];
-            for(int i = 0; i < columnCount; i++){
-                entry[i] = results.getString(i+1);
+            for (int i = 0; i < columnCount; i++) {
+                entry[i] = results.getString(i + 1);
             }
             perf.setAll(entry);
             perfis.add(perf);
         }
         perfis.sort(new Comparator<PerfilEleitor>() {
-			@Override
-			public int compare(PerfilEleitor o1, PerfilEleitor o2) {
-				int a = Integer.parseInt(o1.getQtdNoPerfil().replaceAll("[\\D]", ""));
-				int b = Integer.parseInt(o2.getQtdNoPerfil().replaceAll("[\\D]", ""));
-				return Integer.compare(b, a);
-			}
-		});	
-        		
+            @Override
+            public int compare(PerfilEleitor o1, PerfilEleitor o2) {
+                int a = Integer.parseInt(o1.getQtdNoPerfil().replaceAll("[\\D]", ""));
+                int b = Integer.parseInt(o2.getQtdNoPerfil().replaceAll("[\\D]", ""));
+                return Integer.compare(b, a);
+            }
+        });
+
         return perfis;
     }
-    
-    public ArrayList<PerfilEleitor> getPerfisEleitoresZona(String zona) throws SQLException{
+
+    public ArrayList<PerfilEleitor> getPerfisEleitoresZona(String zona) throws SQLException {
         query
-            = String.format("select * from PerfilEleitor"
-                    + " where CAST( NumZona AS VARCHAR(128) ) = '\"%s\"' ", zona);
+                = String.format("select * from PerfilEleitor"
+                        + " where CAST( NumZona AS VARCHAR(128) ) = '\"%s\"' ", zona);
         Statement stmt = dbConnection.createStatement();
         ResultSet results = stmt.executeQuery(query);
         //
         ArrayList<PerfilEleitor> perfis = new ArrayList<PerfilEleitor>();
         int columnCount = results.getMetaData().getColumnCount();
-        while(results.next()){
+        while (results.next()) {
             PerfilEleitor perf = new PerfilEleitor();
             String entry[] = new String[columnCount];
-            for(int i = 0; i < columnCount; i++){
-                entry[i] = results.getString(i+1);
+            for (int i = 0; i < columnCount; i++) {
+                entry[i] = results.getString(i + 1);
             }
             perf.setAll(entry);
             perfis.add(perf);
         }
         return perfis;
     }
+
+    public ArrayList<Candidatura> getPerfisCandidaturas(String regiao, String cargo) throws SQLException {
+        regiao = regiao.toUpperCase();
+        cargo = cargo.toUpperCase();
+        //
+        query = String.format("SELECT * FROM Candidatura"
+                + " INNER JOIN VotacaoCandidato"
+                + " ON "
+                + " CAST( Candidatura.SeqCandidato AS VARCHAR(128) ) = "
+                + " CAST( VotacaoCandidato.SeqCandidato AS VARCHAR(128) ) "
+                + " WHERE CAST( CANDIDATURA.DESCRICAOCARGO AS VARCHAR(128) ) = '\"%s\"' " // + " WHERE CAST( VotacaoCandidato.NomeMunicipio AS VARCHAR(128) ) = '\"%s\"' "
+                // + " AND CAST( CANDIDATURA.DESCRICAOCARGO AS VARCHAR(128) ) = '\"%s\"' "
+                , cargo);
+        //
+        Statement select = dbConnection.createStatement();
+        ResultSet results = select.executeQuery(query);
+        //
+        ArrayList<String[]> entries = new ArrayList<String[]>();
+        int columnCount = results.getMetaData().getColumnCount();
+        while (results.next()) {
+            String entry[] = new String[columnCount];
+            for (int i = 0; i < columnCount; i++) {
+                entry[i] = results.getString(i + 1);
+            }
+            entries.add(entry);
+        }
+        //
+        entries.sort(new Comparator<String[]>() {
+            @Override
+            public int compare(String[] arg0, String[] arg1) {
+                int a = Integer.parseInt(arg0[44].replaceAll("[\\D]", ""));
+                int b = Integer.parseInt(arg1[44].replaceAll("[\\D]", ""));
+                return Integer.compare(b, a);
+            }
+        });
+        //
+        ArrayList<Candidatura> perfis = new ArrayList<Candidatura>();
+        TreeSet<String> hperfis = new TreeSet<String>();
+        for (String[] entry : entries) {
+            Candidatura cand = new Candidatura();
+            cand.setAll(entry);
+            String seq = cand.getSeqCandidato();
+            if (!hperfis.contains(seq)) {
+                hperfis.add(seq);
+                perfis.add(cand);
+            }
+        }
+        //
+        return perfis;
+    }
     
-    public ArrayList<Candidatura> getPerfisCandidaturasMunicipio(String municipio) throws SQLException{
+    public ArrayList<Candidatura> getPerfisCandidaturasMunicipio(String municipio) throws SQLException {
         municipio = municipio.toUpperCase();
         query = String.format("SELECT * FROM Candidatura"
-                    + " INNER JOIN VotacaoCandidato"
-                    + " ON "
-                    + " CAST( Candidatura.SeqCandidato AS VARCHAR(128) ) = "
-                    + " CAST( VotacaoCandidato.SeqCandidato AS VARCHAR(128) ) "
-                    + " WHERE CAST( VotacaoCandidato.NomeMunicipio AS VARCHAR(128) ) = '\"%s\"' "
-                    , municipio);
+                + " INNER JOIN VotacaoCandidato"
+                + " ON "
+                + " CAST( Candidatura.SeqCandidato AS VARCHAR(128) ) = "
+                + " CAST( VotacaoCandidato.SeqCandidato AS VARCHAR(128) ) "
+                + " WHERE CAST( VotacaoCandidato.NomeMunicipio AS VARCHAR(128) ) = '\"%s\"' ", municipio);
         Statement stmt = dbConnection.createStatement();
         ResultSet results = stmt.executeQuery(query);
         //
         ArrayList<String[]> entries = new ArrayList<String[]>();
         int columnCount = results.getMetaData().getColumnCount();
-        while(results.next()){
+        while (results.next()) {
             String entry[] = new String[columnCount];
-            for(int i = 0; i < columnCount; i++){
-                entry[i] = results.getString(i+1);
+            for (int i = 0; i < columnCount; i++) {
+                entry[i] = results.getString(i + 1);
             }
             entries.add(entry);
         }
         entries.sort(new Comparator<String[]>() {
-			@Override
-			public int compare(String[] arg0, String[] arg1) {
-				int a = Integer.parseInt(arg0[44].replaceAll("[\\D]", ""));
-				int b = Integer.parseInt(arg1[44].replaceAll("[\\D]", ""));
-				return Integer.compare(b, a);
-			}
+            @Override
+            public int compare(String[] arg0, String[] arg1) {
+                int a = Integer.parseInt(arg0[44].replaceAll("[\\D]", ""));
+                int b = Integer.parseInt(arg1[44].replaceAll("[\\D]", ""));
+                return Integer.compare(b, a);
+            }
         });
-        
+
         ArrayList<Candidatura> perfis = new ArrayList<Candidatura>();
         for (String[] entry : entries) {
-        	Candidatura cand = new Candidatura();
-        	cand.setAll(entry);
-        	perfis.add(cand);
+            Candidatura cand = new Candidatura();
+            cand.setAll(entry);
+            perfis.add(cand);
         }
-        
+
         return perfis;
     }
-    
-    public ArrayList<VotacaoCandidato> getVotacaoCandidatos(String municipio) throws SQLException{
+
+    public ArrayList<VotacaoCandidato> getVotacaoCandidatos(String municipio) throws SQLException {
         municipio = municipio.toUpperCase();
         query = String.format("SELECT * FROM VotacaoCandidato"
-                    + " INNER JOIN Candidatura"
-                    + " ON "
-                    + " CAST( Candidatura.SeqCandidato AS VARCHAR(128) ) = "
-                    + " CAST( VotacaoCandidato.SeqCandidato AS VARCHAR(128) ) "
-                    + " WHERE CAST( VotacaoCandidato.NomeMunicipio AS VARCHAR(128) ) = '\"%s\"' "
-                    , municipio);
+                + " INNER JOIN Candidatura"
+                + " ON "
+                + " CAST( Candidatura.SeqCandidato AS VARCHAR(128) ) = "
+                + " CAST( VotacaoCandidato.SeqCandidato AS VARCHAR(128) ) "
+                + " WHERE CAST( VotacaoCandidato.NomeMunicipio AS VARCHAR(128) ) = '\"%s\"' ", municipio);
         Statement stmt = dbConnection.createStatement();
         ResultSet results = stmt.executeQuery(query);
         //
         ArrayList<String[]> entries = new ArrayList<String[]>();
         int columnCount = results.getMetaData().getColumnCount();
-        while(results.next()){
+        while (results.next()) {
             String entry[] = new String[columnCount];
-            for(int i = 0; i < columnCount; i++){
-                entry[i] = results.getString(i+1);
+            for (int i = 0; i < columnCount; i++) {
+                entry[i] = results.getString(i + 1);
             }
             entries.add(entry);
         }
         entries.sort(new Comparator<String[]>() {
-			@Override
-			public int compare(String[] arg0, String[] arg1) {
-				int a = Integer.parseInt(arg0[20].replaceAll("[\\D]", ""));
-				int b = Integer.parseInt(arg1[20].replaceAll("[\\D]", ""));
-                                
-                                int c = Integer.parseInt(arg0[15].replaceAll("[\\D]", ""));
-				int d = Integer.parseInt(arg1[15].replaceAll("[\\D]", ""));
-                                
-                                if(a == b)
-                                    return Integer.compare(d, c);
-                                else
-                                    return Integer.compare(a, b);
-			}
+            @Override
+            public int compare(String[] arg0, String[] arg1) {
+                int a = Integer.parseInt(arg0[20].replaceAll("[\\D]", ""));
+                int b = Integer.parseInt(arg1[20].replaceAll("[\\D]", ""));
+
+                int c = Integer.parseInt(arg0[15].replaceAll("[\\D]", ""));
+                int d = Integer.parseInt(arg1[15].replaceAll("[\\D]", ""));
+
+                if (a == b) {
+                    return Integer.compare(d, c);
+                } else {
+                    return Integer.compare(a, b);
+                }
+            }
         });
-        
+
         ArrayList<VotacaoCandidato> perfis = new ArrayList<VotacaoCandidato>();
         for (String[] entry : entries) {
-        	VotacaoCandidato cand = new VotacaoCandidato();
-        	cand.setAll(entry);
-        	perfis.add(cand);
+            VotacaoCandidato cand = new VotacaoCandidato();
+            cand.setAll(entry);
+            perfis.add(cand);
         }
-        
+
         return perfis;
     }
-    
-    public ArrayList<Candidatura> getPerfisCandidaturasSecao(String secao) throws SQLException{
+
+    public ArrayList<Candidatura> getPerfisCandidaturasSecao(String secao) throws SQLException {
         secao = secao.toUpperCase();
         query = String.format("SELECT * FROM Candidatura"
-                    + " INNER JOIN VotacaoSecao"
-                    + " ON "
-                    + " CAST( Candidatura.NumeroCandidato AS VARCHAR(128) ) = "
-                    + " CAST( VotacaoSecao.NumeroDoVotavel AS VARCHAR(128) ) "
-                    + " WHERE CAST( VotacaoSecao.NumSecao AS VARCHAR(128) ) = '\"%s\"' "
-                    , secao);
+                + " INNER JOIN VotacaoSecao"
+                + " ON "
+                + " CAST( Candidatura.NumeroCandidato AS VARCHAR(128) ) = "
+                + " CAST( VotacaoSecao.NumeroDoVotavel AS VARCHAR(128) ) "
+                + " WHERE CAST( VotacaoSecao.NumSecao AS VARCHAR(128) ) = '\"%s\"' ", secao);
         Statement stmt = dbConnection.createStatement();
         ResultSet results = stmt.executeQuery(query);
         //
         ArrayList<Candidatura> perfis = new ArrayList<Candidatura>();
         int columnCount = results.getMetaData().getColumnCount();
-        while(results.next()){
+        while (results.next()) {
             Candidatura perf = new Candidatura();
             String entry[] = new String[columnCount];
-            for(int i = 0; i < columnCount; i++){
-                entry[i] = results.getString(i+1);
+            for (int i = 0; i < columnCount; i++) {
+                entry[i] = results.getString(i + 1);
             }
             perf.setAll(entry);
             perfis.add(perf);
         }
         return perfis;
     }
-    
+
     public ResultSet get(String tableName) throws SQLException { // throws SQLException
         query = "select * from " + tableName;
         Statement stmt = dbConnection.createStatement();
@@ -388,7 +441,7 @@ public class DAOTSE extends AbstractElectionDAO {
         //stmt.close();
         return results;
     }
-    
+
     // Delete
     public void clearTable(String tableName) throws SQLException {
         String query = "delete from " + tableName + " where true";
@@ -396,24 +449,24 @@ public class DAOTSE extends AbstractElectionDAO {
         stmt.execute(query);
         stmt.close();
     }
-    
+
     // Print query result
     public void printGet(String tableName) throws SQLException {
         ResultSet results;
         results = get(tableName);
         int columnCount = results.getMetaData().getColumnCount();
         while (results.next()) { // results.toString()
-            for(int i = 1; i <= columnCount; i++){
+            for (int i = 1; i <= columnCount; i++) {
                 System.out.print(" | " + results.getString(i));
             }
             System.out.println();
         }
     }
-    
+
     public void printGet(ResultSet results) throws SQLException {
         int columnCount = results.getMetaData().getColumnCount();
         while (results.next()) { // results.toString()
-            for(int i = 1; i <= columnCount; i++){
+            for (int i = 1; i <= columnCount; i++) {
                 System.out.print(" | " + results.getString(i));
             }
             System.out.println();

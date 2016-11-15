@@ -40,11 +40,17 @@ public class ComparaCandidatoEleitor implements ComparadorAbstratoCandidatoEleit
             dao = new DAOTSE();
             dao.connect();
             //
-            candidaturas = dao.getPerfisCandidaturasMunicipio(this.regiao.toUpperCase());
-            eleitorado = dao.getPerfisEleitoresMunicipio(this.regiao.toUpperCase());
+            // Criar um metodo no DAO que busque pelo nome da regiao, cargo e turno
+            // Definir a dominancia
+            //
+            candidaturas = dao.getPerfisCandidaturas(regiao, cargo);
+            //
+            eleitorado = dao.getPerfisEleitoresMunicipio(regiao);
             //
             dao.disconnect();
-            
+            //
+            this.candidatoTableModel.setRowCount(0);
+            //
             // Vector<String> output = new Vector<String>();
             for (Candidatura cand : candidaturas) {
                 if(cand.getDespesaMaximaCampanha().compareTo("\"-1\"") != 0){
@@ -60,6 +66,8 @@ public class ComparaCandidatoEleitor implements ComparadorAbstratoCandidatoEleit
                     candidatoTableModel.addRow(r);
                 }
             }
+            //
+            this.eleitorTableModel.setRowCount(0);
             //
             // output = new Vector<String>();
             for (PerfilEleitor perf : eleitorado) {
