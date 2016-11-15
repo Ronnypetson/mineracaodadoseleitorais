@@ -73,7 +73,7 @@ public class DAOTSE extends AbstractElectionDAO {
                 query = String.format("insert into Candidatura values ('%s',"
                         + "'%s','%s','%s','%s','%s','%s','%s','%s','%s','%s',"
                         + "'%s','%s','%s','%s','%s','%s','%s','%s','%s','%s',"
-                        + "'%s','%s','%s','%s','%s','%s',%d)",
+                        + "'%s','%s','%s','%s','%s','%s',%d,'%s')",
                         cand.getNomeCandidato(), cand.getSeqCandidato(),
                         cand.getNumeroCandidato(), cand.getCPFCandidato(),
                         cand.getNomeUrnaCandidato(), cand.getNumeroPartido(),
@@ -86,7 +86,8 @@ public class DAOTSE extends AbstractElectionDAO {
                         cand.getDescricaoCorRaca(), cand.getCodigoNacionalidade(),
                         cand.getSiglaUFNascimento(), cand.getCodigoMunicipioNascimento(),
                         cand.getNomeMunicipioNascimento(), cand.getDespesaMaximaCampanha(),
-                        cand.getCodigoTotalizacaoTurno(), cand.getEmailCandidato(), i++);
+                        cand.getCodigoTotalizacaoTurno(), cand.getEmailCandidato(), i++,
+                        cand.getDescricaoCargo());
                 stmt.execute(query);
                 //stmt.close();
             }
@@ -291,8 +292,8 @@ public class DAOTSE extends AbstractElectionDAO {
         entries.sort(new Comparator<String[]>() {
 			@Override
 			public int compare(String[] arg0, String[] arg1) {
-				int a = Integer.parseInt(arg0[43].replaceAll("[\\D]", ""));
-				int b = Integer.parseInt(arg1[43].replaceAll("[\\D]", ""));
+				int a = Integer.parseInt(arg0[44].replaceAll("[\\D]", ""));
+				int b = Integer.parseInt(arg1[44].replaceAll("[\\D]", ""));
 				return Integer.compare(b, a);
 			}
         });
@@ -303,7 +304,7 @@ public class DAOTSE extends AbstractElectionDAO {
         	cand.setAll(entry);
         	perfis.add(cand);
         }
-        	
+        
         return perfis;
     }
     
@@ -386,6 +387,14 @@ public class DAOTSE extends AbstractElectionDAO {
         ResultSet results = stmt.executeQuery(query);
         //stmt.close();
         return results;
+    }
+    
+    // Delete
+    public void clearTable(String tableName) throws SQLException {
+        String query = "delete from " + tableName + " where true";
+        Statement stmt = dbConnection.createStatement();
+        stmt.execute(query);
+        stmt.close();
     }
     
     // Print query result

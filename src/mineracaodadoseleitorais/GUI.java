@@ -93,6 +93,6 @@ public class GUI {
                 frame.add(tabbedPane);
                 
                 //
-		btnQuery.addActionListener(new ComparaCandidatoEleitor(candidatoList, eleitoradoList));
+		// btnQuery.addActionListener(new ComparaCandidatoEleitor(candidatoList, eleitoradoList));
 	}
 }

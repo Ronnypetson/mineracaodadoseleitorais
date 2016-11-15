@@ -41,7 +41,9 @@ public class Candidatura extends Votavel {
     }
     
     public Candidatura(String[] entry) {
+        // Carregado do arquivo de texto
         super(Arrays.copyOfRange(entry, 27, 34));
+        this.DescricaoCargo = entry[9];
         this.NomeCandidato = entry[10];
         this.SeqCandidato = entry[11];
         this.NumeroCandidato = entry[12];
@@ -69,10 +71,12 @@ public class Candidatura extends Votavel {
         this.DespesaMaximaCampanha = entry[42];
         this.CodigoTotalizacaoTurno = entry[43];
         this.EmailCandidato = entry[45];
+        // ID
     }
     
     @Override
     public void setAll(String[] entry){
+        // Carregado do banco
         this.NomeCandidato = entry[0];
         this.SeqCandidato = entry[1];
         this.NumeroCandidato = entry[2];
@@ -100,6 +104,8 @@ public class Candidatura extends Votavel {
         this.DespesaMaximaCampanha = entry[24];
         this.CodigoTotalizacaoTurno = entry[25];
         this.EmailCandidato = entry[26];
+        // ID (27 + 1)
+        this.DescricaoCargo = entry[28];
     }
     
     public String getNomeCandidato() {

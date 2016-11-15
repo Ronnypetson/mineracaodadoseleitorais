@@ -30,12 +30,4 @@ public abstract class AbstractElectionDAO {
         // stmt.close();
         dbConnection.close();
     }
-    
-    // Delete
-    public void clearTable(String tableName) throws SQLException {
-        String query = "delete from " + tableName + " where true";
-        Statement stmt = dbConnection.createStatement();
-        stmt.execute(query);
-        stmt.close();
-    }
 }

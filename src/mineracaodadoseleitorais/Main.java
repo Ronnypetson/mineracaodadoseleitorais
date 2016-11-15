@@ -17,10 +17,10 @@ public class Main {
         // DAO testing
         DAOTSE myDAO = new DAOTSE();
         myDAO.connect();
-        // myDAO.clearTable("VotacaoCandidato");
-        // myDAO.insertAllVotacaoCandidato();
+        myDAO.clearTable("Candidatura");
+        myDAO.insertAllCandidatura();
         // myDAO.printGet("VotacaoSecao");
-        ArrayList<Candidatura> perfis = myDAO.getPerfisCandidaturasSecao("56");
+        // ArrayList<Candidatura> perfis = myDAO.getPerfisCandidaturasSecao("56");
         myDAO.disconnect();
     }
 }
