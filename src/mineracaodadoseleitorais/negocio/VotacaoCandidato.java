@@ -35,9 +35,12 @@ public class VotacaoCandidato extends Votacao {
     
     public VotacaoCandidato(String[] entry) {
         super(Arrays.copyOfRange(entry, 0, 9));
+        this.NumTurno = entry[3];
+        this.SiglaUF = entry[5];
         this.CodigoMunicipio = entry[7];
         this.NomeMunicipio = entry[8];
         this.NumZona = entry[9];
+        this.CodigoCargo = entry[10];
         this.NumeroCandidato = entry[11];
         this.SeqCandidato = entry[12];
         this.NomeCandidato = entry[13];
@@ -80,6 +83,9 @@ public class VotacaoCandidato extends Votacao {
         this.CodigoMunicipio = entry[18];
         this.NomeMunicipio = entry[19];
         this.NumZona = entry[20];
+        this.CodigoCargo = entry[21];
+        this.NumTurno = entry[22];
+        this.SiglaUF = entry[23];
     }
     
     public String getNumeroCandidato() {

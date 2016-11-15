@@ -8,9 +8,11 @@ package mineracaodadoseleitorais.dao;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
@@ -25,7 +27,12 @@ public class DAOTSE extends AbstractElectionDAO {
 
     private String query;
     private Statement stmt;
-
+    private List<String> UF
+            = Arrays.asList("AC","AL","AM","AP","BA","CE","DF","ES","GO","MA","MG",
+                          "MS","MT","PA","PB","PE","PI","PR","RJ","RN","RO","RR",
+                          "RS","SC","SE","SP","TO");
+    //
+    
     public DAOTSE() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance(); // Client
         password = "123";
@@ -65,7 +72,7 @@ public class DAOTSE extends AbstractElectionDAO {
         } catch (IOException e) {
         }
     }
-
+    
     public void insertAllCandidatura() throws SQLException, IOException {
         CandidaturaFileTableReader ftr = new CandidaturaFileTableReader();
         try {
@@ -99,7 +106,7 @@ public class DAOTSE extends AbstractElectionDAO {
         } catch (IOException e) {
         }
     }
-
+    
     public void insertAllLegenda() throws SQLException, IOException {
         FileTableReader ftr = new LegendaFileTableReader();
         try {
@@ -155,7 +162,7 @@ public class DAOTSE extends AbstractElectionDAO {
                 query = String.format("insert into VotacaoCandidato values ('%s',"
                         + " '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s',"
                         + " '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s',"
-                        + " %d, '%s', '%s', '%s')",
+                        + " %d, '%s', '%s', '%s', '%s', '%s', '%s')",
                         vc.getNumeroCandidato(), vc.getSeqCandidato(),
                         vc.getNomeCandidato(), vc.getNomeUrnaCandidato(),
                         vc.getCodigoSituacaoCandidatoSuperior(),
@@ -168,7 +175,8 @@ public class DAOTSE extends AbstractElectionDAO {
                         vc.getSeqLegenda(), vc.getNomeColigacao(),
                         vc.getComposicaoLegenda(), vc.getTotalVotos(),
                         vc.getVotoEmTransito(), i++, vc.getCodigoMunicipio(),
-                        vc.getNomeMunicipio(), vc.getNumZona());
+                        vc.getNomeMunicipio(), vc.getNumZona(), vc.getCodigoCargo(),
+                        vc.getNumTurno(), vc.getSiglaUF());
                 stmt.execute(query);
                 // stmt.close();
             }
@@ -219,12 +227,11 @@ public class DAOTSE extends AbstractElectionDAO {
         } catch (IOException e) {
         }
     }
-
+    
     // Query
     public ArrayList<PerfilEleitor> getPerfisEleitoresMunicipio(String municipio) throws SQLException {
         municipio = municipio.toUpperCase();
-        query
-                = String.format("select * from PerfilEleitor"
+        query = String.format("select * from PerfilEleitor"
                         + " where CAST( Municipio AS VARCHAR(128) ) = '\"%s\"' ", municipio);
         Statement select = dbConnection.createStatement();
         ResultSet results = select.executeQuery(query);
@@ -253,8 +260,7 @@ public class DAOTSE extends AbstractElectionDAO {
     }
 
     public ArrayList<PerfilEleitor> getPerfisEleitoresZona(String zona) throws SQLException {
-        query
-                = String.format("select * from PerfilEleitor"
+        query = String.format("select * from PerfilEleitor"
                         + " where CAST( NumZona AS VARCHAR(128) ) = '\"%s\"' ", zona);
         Statement stmt = dbConnection.createStatement();
         ResultSet results = stmt.executeQuery(query);
@@ -272,19 +278,37 @@ public class DAOTSE extends AbstractElectionDAO {
         }
         return perfis;
     }
-
+    
     public ArrayList<Candidatura> getPerfisCandidaturas(String regiao, String cargo) throws SQLException {
         regiao = regiao.toUpperCase();
         cargo = cargo.toUpperCase();
         //
-        query = String.format("SELECT * FROM Candidatura"
-                + " INNER JOIN VotacaoCandidato"
+        String localidade;
+        if(this.UF.contains(regiao)){
+            localidade = " "; // Sigla uf
+        } else {
+            localidade
+                = " AND CAST( VotacaoCandidato.NomeMunicipio AS VARCHAR(128) ) = "
+                    + "'" + regiao + "'";
+        }
+        //
+        query =   " SELECT * FROM Candidatura"
+                + " LEFT JOIN VotacaoCandidato"
                 + " ON "
                 + " CAST( Candidatura.SeqCandidato AS VARCHAR(128) ) = "
                 + " CAST( VotacaoCandidato.SeqCandidato AS VARCHAR(128) ) "
-                + " WHERE CAST( CANDIDATURA.DESCRICAOCARGO AS VARCHAR(128) ) = '\"%s\"' " // + " WHERE CAST( VotacaoCandidato.NomeMunicipio AS VARCHAR(128) ) = '\"%s\"' "
-                // + " AND CAST( CANDIDATURA.DESCRICAOCARGO AS VARCHAR(128) ) = '\"%s\"' "
-                , cargo);
+                + " WHERE CAST( CANDIDATURA.DESCRICAOCARGO AS VARCHAR(128) ) = "
+                + "'" + cargo + "'"
+                + localidade
+                + " UNION ALL "
+                + " SELECT * FROM Candidatura"
+                + " RIGHT JOIN VotacaoCandidato"
+                + " ON "
+                + " CAST( Candidatura.SeqCandidato AS VARCHAR(128) ) = "
+                + " CAST( VotacaoCandidato.SeqCandidato AS VARCHAR(128) ) "
+                + " WHERE CAST( CANDIDATURA.DESCRICAOCARGO AS VARCHAR(128) ) = "
+                + "'" + cargo + "'"
+                + localidade;
         //
         Statement select = dbConnection.createStatement();
         ResultSet results = select.executeQuery(query);

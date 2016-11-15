@@ -7,9 +7,11 @@ import java.util.ArrayList;
 public class CandidaturaFileTableReader extends FileTableReader {
 
     // private ArrayList<Candidatura> rows;
-    static final String TABLE_PATH
+    static String FOLDER
+            = "C:\\Users\\ronnypetsonss\\Documents\\UFRN 2016.2\\Projeto de Software\\dados eleitorais de 2014\\consulta_cand_2014\\consulta_cand_2014_";
+    static String TABLE_PATH
             = "C:\\Users\\ronnypetsonss\\Documents\\UFRN 2016.2\\Projeto de Software\\dados eleitorais de 2014\\consulta_cand_2014\\consulta_cand_2014_RN.txt";
-
+    
     public CandidaturaFileTableReader() throws IOException {
         super(TABLE_PATH);
         rows = new ArrayList<Candidatura>();
