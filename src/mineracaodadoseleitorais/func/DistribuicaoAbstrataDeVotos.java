@@ -5,14 +5,15 @@
  */
 package mineracaodadoseleitorais.func;
 
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author ronnypetsonss
  */
-public interface DistribuicaoAbstrataDeVotos {
+public interface DistribuicaoAbstrataDeVotos extends ActionListener {
     
     public void setMapaDeDistribuicao(String nomeCandidato);
     
     public void setGraficoDeDistribuicao(String nomeCandidato);
-    
 }

@@ -20,7 +20,7 @@ import mineracaodadoseleitorais.negocio.VotacaoCandidato;
  *
  * @author ronnypetsonss
  */
-public class DistribuicaoVotos implements ActionListener {
+public class DistribuicaoVotos {
     
     private JTable votosPorSecaoMunicipio;
     private String regiao;
@@ -36,7 +36,6 @@ public class DistribuicaoVotos implements ActionListener {
         distTableModel = (DefaultTableModel) votacao.getModel();
     }
     
-    @Override
     public void actionPerformed(ActionEvent e) {
         DAOTSE daoTSE;
         ArrayList<VotacaoCandidato> votacao;

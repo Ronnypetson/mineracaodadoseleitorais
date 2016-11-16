@@ -26,12 +26,7 @@ import mineracaodadoseleitorais.negocio.*;
  */
 public class DAOTSE extends AbstractElectionDAO {
 
-    private String query;
-    private Statement stmt;
-    private List<String> UF
-            = Arrays.asList("AC","AL","AM","AP","BA","CE","DF","ES","GO","MA","MG",
-                          "MS","MT","PA","PB","PE","PI","PR","RJ","RN","RO","RR",
-                          "RS","SC","SE","SP","TO");
+    
     //
     
     public DAOTSE() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
@@ -254,16 +249,17 @@ public class DAOTSE extends AbstractElectionDAO {
             perf.setAll(entry);
             perfis.add(perf);
         }
-        perfis.sort(new Comparator<PerfilEleitor>() {
+        // perfis = this.ordenaPerfisDeEleitorPorDominancia(perfis);
+        /* perfis.sort(new Comparator<PerfilEleitor>() {
             @Override
             public int compare(PerfilEleitor o1, PerfilEleitor o2) {
                 int a = Integer.parseInt(o1.getQtdNoPerfil().replaceAll("[\\D]", ""));
                 int b = Integer.parseInt(o2.getQtdNoPerfil().replaceAll("[\\D]", ""));
                 return Integer.compare(b, a);
             }
-        });
+        }); */
 
-        return perfis;
+        return this.ordenaPerfisDeEleitorPorDominancia(perfis);
     }
 
     public ArrayList<PerfilEleitor> getPerfisEleitoresMunicipio(String municipio) throws SQLException {
@@ -360,7 +356,7 @@ public class DAOTSE extends AbstractElectionDAO {
         // Calcular a dominancia dos candidatos
         // Calcular os gastos de campanha
         //
-        TreeMap<String, Candidatura> dominancias = new TreeMap<String, Candidatura>();
+        /* TreeMap<String, Candidatura> dominancias = new TreeMap<String, Candidatura>();
         ArrayList<Candidatura> perfis = new ArrayList<Candidatura>();
         // TreeSet<String> hperfis = new TreeSet<String>();
         for (String[] entry : entries) {
@@ -392,9 +388,13 @@ public class DAOTSE extends AbstractElectionDAO {
                     return Integer.compare(o2.getTotalVotos(), o1.getTotalVotos());
                 }
             }
-        });
+        }); */
         //
-        return perfis;
+        if(ordByGastos){
+            return this.ordenaCandidaturasPorGastos(entries);
+        } else {
+            return this.ordenaCandidaturasPorDominancia(entries);
+        }
     }
     
     public ArrayList<VotacaoCandidato> getPerfisVotacao(String regiao, String cargo) throws SQLException {
