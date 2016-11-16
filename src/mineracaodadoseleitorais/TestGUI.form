@@ -287,8 +287,8 @@
         <Container class="javax.swing.JPanel" name="jPanel2">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Distribui&#xe7;&#xe3;o de Votos">
-                <Property name="tabTitle" type="java.lang.String" value="Distribui&#xe7;&#xe3;o de Votos"/>
+              <JTabbedPaneConstraints tabName="Distribui&#xe7;&#xe3;o de votos nas zonas">
+                <Property name="tabTitle" type="java.lang.String" value="Distribui&#xe7;&#xe3;o de votos nas zonas"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -357,16 +357,16 @@
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="10" rowCount="0">
-                        <Column editable="false" title="Title 1" type="java.lang.String"/>
-                        <Column editable="false" title="Title 2" type="java.lang.String"/>
-                        <Column editable="false" title="Title 3" type="java.lang.String"/>
-                        <Column editable="false" title="Title 4" type="java.lang.String"/>
-                        <Column editable="false" title="null" type="java.lang.String"/>
-                        <Column editable="false" title="null" type="java.lang.String"/>
-                        <Column editable="false" title="null" type="java.lang.String"/>
-                        <Column editable="false" title="null" type="java.lang.String"/>
-                        <Column editable="true" title="null" type="java.lang.String"/>
-                        <Column editable="false" title="null" type="java.lang.String"/>
+                        <Column editable="false" title="Nome" type="java.lang.String"/>
+                        <Column editable="false" title="Coliga&#xe7;&#xe3;o" type="java.lang.String"/>
+                        <Column editable="false" title="Partido" type="java.lang.String"/>
+                        <Column editable="false" title="Cargo" type="java.lang.String"/>
+                        <Column editable="false" title="Nome de Urna" type="java.lang.String"/>
+                        <Column editable="false" title="Munic&#xed;pio" type="java.lang.String"/>
+                        <Column editable="false" title="Nome de Urna" type="java.lang.String"/>
+                        <Column editable="false" title="Zona" type="java.lang.String"/>
+                        <Column editable="false" title="UF" type="java.lang.String"/>
+                        <Column editable="false" title="Total de votos" type="java.lang.String"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
