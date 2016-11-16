@@ -55,67 +55,7 @@ public abstract class AbstractElectionDAO {
         return perfis;
     }
     
-    public ArrayList<Candidatura> ordenaCandidaturasPorDominancia(ArrayList<String[]> entries){
-        TreeMap<String, Candidatura> dominancias = new TreeMap<String, Candidatura>();
-        ArrayList<Candidatura> perfis = new ArrayList<Candidatura>();
-        // TreeSet<String> hperfis = new TreeSet<String>();
-        for (String[] entry : entries) {
-            Candidatura cand = new Candidatura();
-            cand.setAll(entry);
-            // perfis.add(cand);
-            String seq = cand.getSeqCandidato();
-            int votes = Integer.parseInt(entry[44].replaceAll("[\\D]", ""));
-            if(dominancias.containsKey(seq)){
-                int total = dominancias.get(seq).getTotalVotos();
-                dominancias.get(seq).setTotalVotos(total + votes);
-            } else {
-                dominancias.put(seq, cand);
-            }
-        }
-        //
-        for(Candidatura c: dominancias.values()){
-            perfis.add(c);
-        }
-        //
-        perfis.sort(new Comparator<Candidatura>(){
-            @Override
-            public int compare(Candidatura o1, Candidatura o2) {
-                return Integer.compare(o2.getTotalVotos(), o1.getTotalVotos());
-            }
-        });
-        return perfis;
-    }
+    public abstract ArrayList<Candidatura> ordenaCandidaturasPorDominancia(ArrayList<String[]> entries);
     
-    public ArrayList<Candidatura> ordenaCandidaturasPorGastos(ArrayList<String[]> entries){
-        TreeMap<String, Candidatura> dominancias = new TreeMap<String, Candidatura>();
-        ArrayList<Candidatura> perfis = new ArrayList<Candidatura>();
-        // TreeSet<String> hperfis = new TreeSet<String>();
-        for (String[] entry : entries) {
-            Candidatura cand = new Candidatura();
-            cand.setAll(entry);
-            // perfis.add(cand);
-            String seq = cand.getSeqCandidato();
-            int votes = Integer.parseInt(entry[44].replaceAll("[\\D]", ""));
-            if(dominancias.containsKey(seq)){
-                int total = dominancias.get(seq).getTotalVotos();
-                dominancias.get(seq).setTotalVotos(total + votes);
-            } else {
-                dominancias.put(seq, cand);
-            }
-        }
-        //
-        for(Candidatura c: dominancias.values()){
-            perfis.add(c);
-        }
-        //
-        perfis.sort(new Comparator<Candidatura>(){
-            @Override
-            public int compare(Candidatura o1, Candidatura o2) {
-                int a = Integer.parseInt(o1.getDespesaMaximaCampanha().replaceAll("[\\D]", ""));
-                int b = Integer.parseInt(o2.getDespesaMaximaCampanha().replaceAll("[\\D]", ""));
-                return Integer.compare(b, a);
-            }
-        });
-        return perfis;
-    }
+    public abstract ArrayList<Candidatura> ordenaCandidaturasPorGastos(ArrayList<String[]> entries);
 }
