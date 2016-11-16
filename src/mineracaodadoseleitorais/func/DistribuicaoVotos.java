@@ -43,7 +43,7 @@ public class DistribuicaoVotos implements ActionListener {
         try{
             daoTSE = new DAOTSE();
             daoTSE.connect();
-            votacao = daoTSE.getVotacaoCandidatos(this.regiao);
+            votacao = daoTSE.getPerfisVotacao(regiao, cargo);
             daoTSE.disconnect();
             //
             this.distTableModel.setRowCount(0);

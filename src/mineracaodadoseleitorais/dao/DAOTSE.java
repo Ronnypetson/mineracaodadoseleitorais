@@ -391,6 +391,87 @@ public class DAOTSE extends AbstractElectionDAO {
         return perfis;
     }
     
+    public ArrayList<VotacaoCandidato> getPerfisVotacao(String regiao, String cargo) throws SQLException {
+        regiao = regiao.toUpperCase();
+        cargo = cargo.toUpperCase();
+        //
+        String localidade;
+        if(this.UF.contains(regiao)){
+            localidade = " AND CAST( VotacaoCandidato.SiglaUF AS VARCHAR(128) ) = "
+                    + "'\"" + regiao + "\"'";
+        } else {
+            localidade
+                = " AND CAST( VotacaoCandidato.NomeMunicipio AS VARCHAR(128) ) = "
+                    + "'\"" + regiao + "\"'";
+        }
+        //
+        query =   " SELECT * FROM VotacaoCandidato"
+                + " INNER JOIN Candidatura"
+                + " ON "
+                + " CAST( Candidatura.SeqCandidato AS VARCHAR(128) ) = "
+                + " CAST( VotacaoCandidato.SeqCandidato AS VARCHAR(128) ) "
+                + " WHERE "
+                + " CAST( CANDIDATURA.DESCRICAOCARGO AS VARCHAR(128) ) = "
+                + " '\"" + cargo + "\"'"
+                + localidade;
+        //
+        Statement select = dbConnection.createStatement();
+        ResultSet results = select.executeQuery(query);
+        //
+        ArrayList<String[]> entries = new ArrayList<String[]>();
+        int columnCount = results.getMetaData().getColumnCount();
+        while (results.next()) {
+            String entry[] = new String[columnCount];
+            for (int i = 0; i < columnCount; i++) {
+                entry[i] = results.getString(i + 1);
+            }
+            entries.add(entry);
+        }
+        //
+        // Calcular a dominancia dos candidatos
+        // Calcular os gastos de campanha
+        //
+        // TreeMap<String, Candidatura> dominancias = new TreeMap<String, Candidatura>();
+        ArrayList<VotacaoCandidato> perfis = new ArrayList<VotacaoCandidato>();
+        // TreeSet<String> hperfis = new TreeSet<String>();
+        for (String[] entry : entries) {
+            VotacaoCandidato cand = new VotacaoCandidato();
+            cand.setAll(entry);
+            perfis.add(cand);
+            String seq = cand.getSeqCandidato();
+            // int votes = Integer.parseInt(entry[44].replaceAll("[\\D]", ""));
+            /* if(dominancias.containsKey(seq)){
+                int total = dominancias.get(seq).getTotalVotos();
+                dominancias.get(seq).setTotalVotos(total + votes);
+            } else {
+                dominancias.put(seq, cand);
+            } */
+        }
+        //
+        /* for(Candidatura c: dominancias.values()){
+            perfis.add(c);
+        } */
+        //
+        perfis.sort(new Comparator<VotacaoCandidato>(){
+            @Override
+            public int compare(VotacaoCandidato o1, VotacaoCandidato o2) {
+                int a = Integer.parseInt(o1.getNumZona().replaceAll("[\\D]", ""));
+                int b = Integer.parseInt(o2.getNumZona().replaceAll("[\\D]", ""));
+
+                int c = Integer.parseInt(o1.getTotalVotos().replaceAll("[\\D]", ""));
+                int d = Integer.parseInt(o2.getTotalVotos().replaceAll("[\\D]", ""));
+
+                if (a == b) {
+                    return Integer.compare(d, c);
+                } else {
+                    return Integer.compare(a, b);
+                }
+            }
+        });
+        //
+        return perfis;
+    }
+    
     public ArrayList<Candidatura> getPerfisCandidaturasMunicipio(String municipio) throws SQLException {
         municipio = municipio.toUpperCase();
         query = String.format("SELECT * FROM Candidatura"
