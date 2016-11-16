@@ -36,8 +36,10 @@ public class Candidatura extends Votavel {
     private String DespesaMaximaCampanha;
     private String CodigoTotalizacaoTurno;
     private String EmailCandidato;
-    
+    private int totalVotos;
+
     public Candidatura() {
+        this.totalVotos = 0;
     }
     
     public Candidatura(String[] entry) {
@@ -72,6 +74,8 @@ public class Candidatura extends Votavel {
         this.CodigoTotalizacaoTurno = entry[43];
         this.EmailCandidato = entry[45];
         // ID
+        //
+        this.totalVotos = 0;
     }
     
     @Override
@@ -298,5 +302,13 @@ public class Candidatura extends Votavel {
 
     public void setEmailCandidato(String EmailCandidato) {
         this.EmailCandidato = EmailCandidato;
+    }
+    
+    public int getTotalVotos() {
+        return totalVotos;
+    }
+
+    public void setTotalVotos(int totalVotos) {
+        this.totalVotos = totalVotos;
     }
 }

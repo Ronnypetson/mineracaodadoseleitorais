@@ -61,7 +61,8 @@ public class ComparaCandidatoEleitor implements ComparadorAbstratoCandidatoEleit
                         cand.getDescricaoGrauInstrucao(),
                         // cand.getDescricaoOcupacao()
                         cand.getDespesaMaximaCampanha(),
-                        cand.getDescricaoCargo() };
+                        cand.getDescricaoCargo(),
+                        "" + cand.getTotalVotos() };
                     // output.add(s);
                     candidatoTableModel.addRow(r);
                 }

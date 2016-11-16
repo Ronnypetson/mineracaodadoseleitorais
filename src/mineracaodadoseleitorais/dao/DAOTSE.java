@@ -15,6 +15,7 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.TreeSet;
 
 import mineracaodadoseleitorais.negocio.*;
@@ -238,7 +239,7 @@ public class DAOTSE extends AbstractElectionDAO {
             condition = " CAST( Municipio AS VARCHAR(128) ) = " + "'\"" + regiao + "\"'";
         }
         query = String.format("select * from PerfilEleitor"
-                        + " where " + condition, regiao);
+                        + " where " + condition);
         Statement select = dbConnection.createStatement();
         ResultSet results = select.executeQuery(query);
         //
@@ -334,7 +335,7 @@ public class DAOTSE extends AbstractElectionDAO {
         }
         //
         query =   " SELECT * FROM Candidatura"
-                + " LEFT JOIN VotacaoCandidato"
+                + " INNER JOIN VotacaoCandidato"
                 + " ON "
                 + " CAST( Candidatura.SeqCandidato AS VARCHAR(128) ) = "
                 + " CAST( VotacaoCandidato.SeqCandidato AS VARCHAR(128) ) "
@@ -356,28 +357,36 @@ public class DAOTSE extends AbstractElectionDAO {
             entries.add(entry);
         }
         //
-        // Somar os votos
+        // Calcular a dominancia dos candidatos
+        // Calcular os gastos de campanha
         //
-        entries.sort(new Comparator<String[]>() {
-            @Override
-            public int compare(String[] arg0, String[] arg1) {
-                int a = Integer.parseInt(arg0[44].replaceAll("[\\D]", ""));
-                int b = Integer.parseInt(arg1[44].replaceAll("[\\D]", ""));
-                return Integer.compare(b, a);
-            }
-        });
-        //
+        TreeMap<String, Candidatura> dominancias = new TreeMap<String, Candidatura>();
         ArrayList<Candidatura> perfis = new ArrayList<Candidatura>();
-        TreeSet<String> hperfis = new TreeSet<String>();
+        // TreeSet<String> hperfis = new TreeSet<String>();
         for (String[] entry : entries) {
             Candidatura cand = new Candidatura();
             cand.setAll(entry);
+            // perfis.add(cand);
             String seq = cand.getSeqCandidato();
-            if (!hperfis.contains(seq)) {
-                hperfis.add(seq);
-                perfis.add(cand);
+            int votes = Integer.parseInt(entry[44].replaceAll("[\\D]", ""));
+            if(dominancias.containsKey(seq)){
+                int total = dominancias.get(seq).getTotalVotos();
+                dominancias.get(seq).setTotalVotos(total + votes);
+            } else {
+                dominancias.put(seq, cand);
             }
         }
+        //
+        for(Candidatura c: dominancias.values()){
+            perfis.add(c);
+        }
+        //
+        perfis.sort(new Comparator<Candidatura>(){
+            @Override
+            public int compare(Candidatura o1, Candidatura o2) {
+                return Integer.compare(o2.getTotalVotos(), o1.getTotalVotos());
+            }
+        });
         //
         return perfis;
     }
@@ -423,14 +432,11 @@ public class DAOTSE extends AbstractElectionDAO {
 
     public ArrayList<VotacaoCandidato> getVotacaoCandidatos(String municipio) throws SQLException {
         municipio = municipio.toUpperCase();
-        query = String.format("SELECT * FROM VotacaoCandidato"
-                + " INNER JOIN Candidatura"
-                + " ON "
-                + " CAST( Candidatura.SeqCandidato AS VARCHAR(128) ) = "
-                + " CAST( VotacaoCandidato.SeqCandidato AS VARCHAR(128) ) "
-                + " WHERE CAST( VotacaoCandidato.NomeMunicipio AS VARCHAR(128) ) = '\"%s\"' ", municipio);
-        Statement stmt = dbConnection.createStatement();
-        ResultSet results = stmt.executeQuery(query);
+        query = String.format("SELECT * FROM VotacaoCandidato "
+                + " WHERE CAST( VotacaoCandidato.NomeMunicipio AS VARCHAR(128) ) = '\"%s\"' "
+                , municipio);
+        Statement select = dbConnection.createStatement();
+        ResultSet results = select.executeQuery(query);
         //
         ArrayList<String[]> entries = new ArrayList<String[]>();
         int columnCount = results.getMetaData().getColumnCount();

@@ -46,6 +46,8 @@ public class DistribuicaoVotos implements ActionListener {
             votacao = daoTSE.getVotacaoCandidatos(this.regiao);
             daoTSE.disconnect();
             //
+            this.distTableModel.setRowCount(0);
+            //
             for (VotacaoCandidato vc : votacao) {
                     String r[] = { vc.getNomeCandidato(),
                                 vc.getComposicaoLegenda(),
