@@ -320,7 +320,7 @@ public class DAOTSE extends AbstractElectionDAO {
         return perfis;
     }
     
-    public ArrayList<Candidatura> getPerfisCandidaturas(String regiao, String cargo) throws SQLException {
+    public ArrayList<Candidatura> getPerfisCandidaturas(String regiao, String cargo, final boolean ordByGastos) throws SQLException {
         regiao = regiao.toUpperCase();
         cargo = cargo.toUpperCase();
         //
@@ -384,7 +384,13 @@ public class DAOTSE extends AbstractElectionDAO {
         perfis.sort(new Comparator<Candidatura>(){
             @Override
             public int compare(Candidatura o1, Candidatura o2) {
-                return Integer.compare(o2.getTotalVotos(), o1.getTotalVotos());
+                if(ordByGastos){
+                    int a = Integer.parseInt(o1.getDespesaMaximaCampanha().replaceAll("[\\D]", ""));
+                    int b = Integer.parseInt(o2.getDespesaMaximaCampanha().replaceAll("[\\D]", ""));
+                    return Integer.compare(b, a);
+                } else {
+                    return Integer.compare(o2.getTotalVotos(), o1.getTotalVotos());
+                }
             }
         });
         //

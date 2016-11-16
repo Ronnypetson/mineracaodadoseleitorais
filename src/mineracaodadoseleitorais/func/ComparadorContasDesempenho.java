@@ -5,11 +5,13 @@
  */
 package mineracaodadoseleitorais.func;
 
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author ronnypetsonss
  */
-public interface ComparadorContasDesempenho {
+public interface ComparadorContasDesempenho extends ActionListener {
     
     public void setGraficoBens(String nomeCandidato);
     

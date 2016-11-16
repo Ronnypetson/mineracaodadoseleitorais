@@ -43,7 +43,7 @@ public class ComparaCandidatoEleitor implements ComparadorAbstratoCandidatoEleit
             // Criar um metodo no DAO que busque pelo nome da regiao, cargo e turno
             // Definir a dominancia
             //
-            candidaturas = dao.getPerfisCandidaturas(regiao, cargo);
+            candidaturas = dao.getPerfisCandidaturas(regiao, cargo, false);
             //
             eleitorado = dao.getPerfisEleitores(regiao);
             //
@@ -56,11 +56,11 @@ public class ComparaCandidatoEleitor implements ComparadorAbstratoCandidatoEleit
                 if(cand.getDespesaMaximaCampanha().compareTo("\"-1\"") != 0){
                     String r[] = { cand.getNomeCandidato(),
                         cand.getDescricaoSexo(),
-                        // cand.getDescricaoCorRaca(),
+                        cand.getNomePartido(),
                         // cand.getDescricaoEstadoCivil(),
                         cand.getDescricaoGrauInstrucao(),
-                        // cand.getDescricaoOcupacao()
-                        cand.getDespesaMaximaCampanha(),
+                        // cand.getDescricaoOcupacao(),
+                        // cand.getDespesaMaximaCampanha(),
                         cand.getDescricaoCargo(),
                         "" + cand.getTotalVotos() };
                     // output.add(s);
