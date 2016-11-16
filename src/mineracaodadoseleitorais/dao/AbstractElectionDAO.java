@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.TreeMap;
 import mineracaodadoseleitorais.negocio.Candidatura;
 import mineracaodadoseleitorais.negocio.PerfilEleitor;
 

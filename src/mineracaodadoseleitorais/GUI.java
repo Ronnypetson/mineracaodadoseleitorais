@@ -8,7 +8,6 @@ import javax.swing.JButton;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import mineracaodadoseleitorais.dao.DAOTSE;
-import mineracaodadoseleitorais.func.ComparaCandidatoEleitor;
 
 import java.awt.FlowLayout;
 import javax.swing.JList;
