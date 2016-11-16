@@ -134,7 +134,7 @@ public class TestGUI extends javax.swing.JFrame {
 
         jLabel3.setText("Cargo");
 
-        CargoTextField.setText("Vereador");
+        CargoTextField.setText("Senador");
 
         jLabel4.setText("Região");
 
@@ -211,14 +211,14 @@ public class TestGUI extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nome", "Coligação", "Partido", "Cargo", "Nome de Urna", "Município", "Nome de Urna", "Zona", "UF", "Total de votos"
+                "Nome", "Coligação", "Partido", "Cargo", "Município", "Nome de Urna", "Zona", "UF", "Total de votos"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
