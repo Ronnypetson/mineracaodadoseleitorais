@@ -56,7 +56,7 @@ public class ComparaCandidatoEleitor implements ComparadorAbstratoCandidatoEleit
                 if(cand.getDespesaMaximaCampanha().compareTo("\"-1\"") != 0){
                     String r[] = { cand.getNomeCandidato(),
                         cand.getDescricaoSexo(),
-                        cand.getNomePartido(),
+                        cand.getSiglaPartido(),
                         // cand.getDescricaoEstadoCivil(),
                         cand.getDescricaoGrauInstrucao(),
                         // cand.getDescricaoOcupacao(),

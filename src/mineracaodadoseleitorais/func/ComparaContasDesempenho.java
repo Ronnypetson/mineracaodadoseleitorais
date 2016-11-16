@@ -17,7 +17,6 @@ import mineracaodadoseleitorais.negocio.Candidatura;
  * @author ronnypetsonss
  */
 public class ComparaContasDesempenho implements ComparadorContasDesempenho {
-
     
     private JTable candidatosTable;
     private JTable eleitoresTable;
@@ -28,7 +27,7 @@ public class ComparaContasDesempenho implements ComparadorContasDesempenho {
     private String cargo;
     
     public ComparaContasDesempenho(JTable candidatoList, JTable contasList,
-            String regiao, String turno, String cargo) {
+            String cargo, String regiao, String turno) {
         this.candidatosTable = candidatoList;
         this.eleitoresTable = contasList;
         this.candidatoTableModel = (DefaultTableModel) this.candidatosTable.getModel();
@@ -63,7 +62,7 @@ public class ComparaContasDesempenho implements ComparadorContasDesempenho {
                 if(cand.getDespesaMaximaCampanha().compareTo("\"-1\"") != 0){
                     String r[] = { cand.getNomeCandidato(),
                         cand.getDescricaoSexo(),
-                        cand.getNomePartido(),
+                        cand.getSiglaPartido(),
                         // cand.getDescricaoEstadoCivil(),
                         cand.getDescricaoGrauInstrucao(),
                         // cand.getDescricaoOcupacao()
@@ -84,7 +83,7 @@ public class ComparaContasDesempenho implements ComparadorContasDesempenho {
                         perf.getDespesaMaximaCampanha(),
                         perf.getDescricaoCargo(),
                         "" + perf.getTotalVotos(),
-                        perf.getNomePartido()};
+                        perf.getSiglaPartido()};
                 // output.add(s);
                 contasTableModel.addRow(r);
             }
