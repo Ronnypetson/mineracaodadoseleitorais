@@ -11,6 +11,11 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import mineracaodadoseleitorais.dao.DAOTSE;
 import mineracaodadoseleitorais.negocio.Candidatura;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
  *
@@ -46,9 +51,6 @@ public class ComparaContasDesempenho implements ComparadorContasDesempenho {
             dao = new DAOTSE();
             dao.connect();
             //
-            // Criar um metodo no DAO que busque pelo nome da regiao, cargo e turno
-            // Definir a dominancia
-            //
             candidaturas = dao.getPerfisCandidaturas(regiao, cargo, false);
             //
             gastos = dao.getPerfisCandidaturas(regiao, cargo, true);
@@ -57,26 +59,20 @@ public class ComparaContasDesempenho implements ComparadorContasDesempenho {
             //
             this.candidatoTableModel.setRowCount(0);
             //
-            // Vector<String> output = new Vector<String>();
             for (Candidatura cand : candidaturas) {
                 if(cand.getDespesaMaximaCampanha().compareTo("\"-1\"") != 0){
                     String r[] = { cand.getNomeCandidato(),
                         cand.getDescricaoSexo(),
                         cand.getSiglaPartido(),
-                        // cand.getDescricaoEstadoCivil(),
                         cand.getDescricaoGrauInstrucao(),
-                        // cand.getDescricaoOcupacao()
-                        // cand.getDespesaMaximaCampanha(),
                         cand.getDescricaoCargo(),
                         "" + cand.getTotalVotos() };
-                    // output.add(s);
                     candidatoTableModel.addRow(r);
                 }
             }
             //
             this.contasTableModel.setRowCount(0);
             //
-            // output = new Vector<String>();
             for (Candidatura perf : gastos) {
                 String r[] = { perf.getNomeCandidato(),
                         perf.getDescricaoOcupacao(),
@@ -84,26 +80,51 @@ public class ComparaContasDesempenho implements ComparadorContasDesempenho {
                         perf.getDescricaoCargo(),
                         "" + perf.getTotalVotos(),
                         perf.getSiglaPartido()};
-                // output.add(s);
                 contasTableModel.addRow(r);
             }
-            // eleitoradoList.setListData(output);
+            //
+            setGraficoBens(candidaturas);
         } catch (Exception e1) {
             // TODO Auto-generated catch block
             e1.printStackTrace();
         }
     }
-
-    public void setGraficoBens(String nomeCandidato) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    public void setGraficoBens(ArrayList<Candidatura> candidaturas) {
+        //
+        // Line Series Chart
+        //
+        DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
+        //
+        for (Candidatura cand : candidaturas) {
+            if(cand.getDespesaMaximaCampanha().compareTo("\"-1\"") != 0){
+                dataSet.addValue(cand.getTotalVotos()*100, "Desempenho",
+                                 cand.getNomeUrnaCandidato());
+                Integer despesa
+                        = Integer.parseInt(cand.getDespesaMaximaCampanha()
+                                .replaceAll("[\\D]", ""));
+                dataSet.addValue(despesa, "Despesa",
+                                 cand.getNomeUrnaCandidato());
+            }
+        }
+        //
+        JFreeChart chart = ChartFactory
+                .createLineChart("Contas e desempenho",
+                                 "Candidato",
+                                 "Votos-Desempenho", dataSet,
+                                 PlotOrientation.VERTICAL, true, true, false);
+        // LinePlot p = (LinePlot)chart.getPlot();
+        ChartFrame frame = new ChartFrame("", chart);
+        frame.setVisible(true);
+        frame.setSize(450, 500);
+        //
     }
-
+    
     public void setDesempenho(String nomeCandidato) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     public void setCorrelacaoContasDesempenho() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
 }

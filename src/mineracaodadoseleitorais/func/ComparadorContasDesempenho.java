@@ -6,6 +6,8 @@
 package mineracaodadoseleitorais.func;
 
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import mineracaodadoseleitorais.negocio.Candidatura;
 
 /**
  *
@@ -13,7 +15,7 @@ import java.awt.event.ActionListener;
  */
 public interface ComparadorContasDesempenho extends ActionListener {
     
-    public void setGraficoBens(String nomeCandidato);
+    public void setGraficoBens(ArrayList<Candidatura> candidaturas);
     
     public void setDesempenho(String nomeCandidato);
     
