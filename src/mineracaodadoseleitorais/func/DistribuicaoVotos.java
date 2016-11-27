@@ -89,7 +89,7 @@ public class DistribuicaoVotos implements DistribuicaoAbstrataDeVotos {
         TreeMap<String,Integer> data_ = new TreeMap<String,Integer>();
         //
         for (VotacaoCandidato vot : votacao) {
-            String perfName = vot.getNomeMunicipio();
+            String perfName = vot.getNomeMunicipio()+vot.getNomeUrnaCandidato();
             Integer qtd = Integer.parseInt(vot.getTotalVotos().replaceAll("[\\D]", ""));
             if(data_.containsKey(perfName)){
                 qtd += data_.get(perfName);

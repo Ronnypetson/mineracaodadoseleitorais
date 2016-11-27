@@ -103,9 +103,9 @@ public class ComparaCandidatoEleitor implements ComparadorAbstratoCandidatoEleit
         }
         //
         JFreeChart pieChart = ChartFactory
-                .createPieChart("", pieDataSet, true, true, true);
+                .createPieChart("Eleitores", pieDataSet, true, true, true);
         PiePlot p = (PiePlot)pieChart.getPlot();
-        ChartFrame frame = new ChartFrame("Gráfico de Pizza", pieChart);
+        ChartFrame frame = new ChartFrame("", pieChart);
         frame.setVisible(true);
         frame.setSize(450, 500);
         //
@@ -129,9 +129,9 @@ public class ComparaCandidatoEleitor implements ComparadorAbstratoCandidatoEleit
         }
         //
         JFreeChart pieChart = ChartFactory
-                .createPieChart("", pieDataSet, true, true, true);
+                .createPieChart("Candidatos", pieDataSet, true, true, true);
         PiePlot p = (PiePlot)pieChart.getPlot();
-        ChartFrame frame = new ChartFrame("Gráfico de Pizza", pieChart);
+        ChartFrame frame = new ChartFrame("", pieChart);
         frame.setVisible(true);
         frame.setSize(450, 500);
         //
