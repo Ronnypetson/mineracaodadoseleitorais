@@ -6,6 +6,9 @@
 package mineracaodadoseleitorais.func;
 
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import mineracaodadoseleitorais.negocio.Candidatura;
+import mineracaodadoseleitorais.negocio.PerfilEleitor;
 
 /**
  *
@@ -13,9 +16,9 @@ import java.awt.event.ActionListener;
  */
 public interface ComparadorAbstratoCandidatoEleitor extends ActionListener {
     
-    public void setGraficoCandidato(String nomeMunicipio);
+    public void setGraficoCandidato(ArrayList<Candidatura> cands);
     
-    public void setGraficoEleitor(String nomeMunicipio);
+    public void setGraficoEleitor(ArrayList<PerfilEleitor> eleitores);
     
     public void setCorrelacao(String nomeMunicipio);
     

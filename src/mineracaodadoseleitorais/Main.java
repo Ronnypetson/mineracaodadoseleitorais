@@ -21,7 +21,6 @@ public class Main {
         // myDAO.insertAllCandidatura();
         // myDAO.clearTable("VOTACAOCANDIDATO");
         // myDAO.insertAllVotacaoCandidato();
-        // myDAO.printGet("VotacaoSecao");
         // ArrayList<Candidatura> perfis = myDAO.getPerfisCandidaturasSecao("56");
         myDAO.disconnect();
     }

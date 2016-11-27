@@ -2,6 +2,7 @@ package mineracaodadoseleitorais.func;
 
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -45,49 +46,26 @@ public class ComparaCandidatoEleitor implements ComparadorAbstratoCandidatoEleit
             dao = new DAOTSE();
             dao.connect();
             //
-            // Criar um metodo no DAO que busque pelo nome da regiao, cargo e turno
-            // Definir a dominancia
             //
             candidaturas = dao.getPerfisCandidaturas(regiao, cargo, false);
-            //
             eleitorado = dao.getPerfisEleitores(regiao);
-            //
             dao.disconnect();
             //
             this.candidatoTableModel.setRowCount(0);
-            //
-            //
-            // Pie Chart
-            //
-            DefaultPieDataset pieDataSet = new DefaultPieDataset();
-            //
             for (Candidatura cand : candidaturas) {
                 if(cand.getDespesaMaximaCampanha().compareTo("\"-1\"") != 0){
                     String r[] = { cand.getNomeCandidato(),
                         cand.getDescricaoSexo(),
                         cand.getSiglaPartido(),
-                        // cand.getDescricaoEstadoCivil(),
                         cand.getDescricaoGrauInstrucao(),
-                        // cand.getDescricaoOcupacao(),
-                        // cand.getDespesaMaximaCampanha(),
                         cand.getDescricaoCargo(),
                         "" + cand.getTotalVotos() };
-                    // output.add(s);
                     candidatoTableModel.addRow(r);
-                    pieDataSet.setValue(cand.getNomeUrnaCandidato(),
-                                        cand.getTotalVotos());
                 }
             }
-            //
-            JFreeChart pieChart = ChartFactory
-                    .createPieChart("", pieDataSet, true, true, true);
-            PiePlot p = (PiePlot)pieChart.getPlot();
-            ChartFrame frame = new ChartFrame("Gráfico de Pizza", pieChart);
-            frame.setVisible(true);
-            frame.setSize(450, 500);
+            setGraficoCandidato(candidaturas);
             //
             this.eleitorTableModel.setRowCount(0);
-            //
             for (PerfilEleitor perf : eleitorado) {
                 String r[] = { perf.getUF(),
                         perf.getMunicipio(),
@@ -96,24 +74,66 @@ public class ComparaCandidatoEleitor implements ComparadorAbstratoCandidatoEleit
                         perf.getGrauDeEscolaridade(),
                         perf.getNumZona(),
                         perf.getQtdNoPerfil() };
-                // output.add(s);
                 eleitorTableModel.addRow(r);
             }
+            setGraficoEleitor(eleitorado);
+            //
         } catch (Exception e1) {
             // TODO Auto-generated catch block
             e1.printStackTrace();
         }
     }
-
-    public void setGraficoCandidato(String nomeMunicipio) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void setGraficoEleitor(String nomeMunicipio) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    public void setGraficoEleitor(ArrayList<PerfilEleitor> eleitores) {
+        //
+        // Pie Chart
+        //
+        DefaultPieDataset pieDataSet = new DefaultPieDataset();
+        TreeMap<String,Integer> pie_ = new TreeMap<String,Integer>();
+        //
+        for (PerfilEleitor perf : eleitores) {
+            String perfName = perf.getFaixaEtaria() + perf.getSexo();
+            Integer qtd = Integer.parseInt(perf.getQtdNoPerfil().replaceAll("[\\D]", ""));
+            if(pie_.containsKey(perfName)){
+                qtd += pie_.get(perfName);
+            } else {
+                pie_.put(perfName, qtd);
+            }
+            pieDataSet.setValue(perfName, qtd);
+        }
+        //
+        JFreeChart pieChart = ChartFactory
+                .createPieChart("", pieDataSet, true, true, true);
+        PiePlot p = (PiePlot)pieChart.getPlot();
+        ChartFrame frame = new ChartFrame("Gráfico de Pizza", pieChart);
+        frame.setVisible(true);
+        frame.setSize(450, 500);
+        //
     }
 
     public void setCorrelacao(String nomeMunicipio) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public void setGraficoCandidato(ArrayList<Candidatura> cands) {
+        //
+        // Pie Chart
+        //
+        DefaultPieDataset pieDataSet = new DefaultPieDataset();
+        //
+        for (Candidatura cand : cands) {
+            if(cand.getDespesaMaximaCampanha().compareTo("\"-1\"") != 0){
+                pieDataSet.setValue(cand.getNomeUrnaCandidato(),
+                                    cand.getTotalVotos());
+            }
+        }
+        //
+        JFreeChart pieChart = ChartFactory
+                .createPieChart("", pieDataSet, true, true, true);
+        PiePlot p = (PiePlot)pieChart.getPlot();
+        ChartFrame frame = new ChartFrame("Gráfico de Pizza", pieChart);
+        frame.setVisible(true);
+        frame.setSize(450, 500);
+        //
     }
 }
