@@ -6,6 +6,8 @@
 package mineracaodadoseleitorais.func;
 
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import mineracaodadoseleitorais.negocio.VotacaoCandidato;
 
 /**
  *
@@ -13,7 +15,7 @@ import java.awt.event.ActionListener;
  */
 public interface DistribuicaoAbstrataDeVotos extends ActionListener {
     
-    public void setMapaDeDistribuicao(String nomeCandidato);
+    public void setMapaDeDistribuicao(ArrayList<VotacaoCandidato> votacao);
     
-    public void setGraficoDeDistribuicao(String nomeCandidato);
+    public void setGraficoDeDistribuicao(ArrayList<VotacaoCandidato> votacao);
 }
