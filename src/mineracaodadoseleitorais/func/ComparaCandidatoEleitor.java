@@ -9,6 +9,11 @@ import javax.swing.table.DefaultTableModel;
 import mineracaodadoseleitorais.dao.DAOTSE;
 import mineracaodadoseleitorais.negocio.Candidatura;
 import mineracaodadoseleitorais.negocio.PerfilEleitor;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PiePlot;
+import org.jfree.data.general.DefaultPieDataset;
 
 public class ComparaCandidatoEleitor implements ComparadorAbstratoCandidatoEleitor {
 
@@ -51,7 +56,11 @@ public class ComparaCandidatoEleitor implements ComparadorAbstratoCandidatoEleit
             //
             this.candidatoTableModel.setRowCount(0);
             //
-            // Vector<String> output = new Vector<String>();
+            //
+            // Pie Chart
+            //
+            DefaultPieDataset pieDataSet = new DefaultPieDataset();
+            //
             for (Candidatura cand : candidaturas) {
                 if(cand.getDespesaMaximaCampanha().compareTo("\"-1\"") != 0){
                     String r[] = { cand.getNomeCandidato(),
@@ -65,12 +74,20 @@ public class ComparaCandidatoEleitor implements ComparadorAbstratoCandidatoEleit
                         "" + cand.getTotalVotos() };
                     // output.add(s);
                     candidatoTableModel.addRow(r);
+                    pieDataSet.setValue(cand.getNomeUrnaCandidato(),
+                                        cand.getTotalVotos());
                 }
             }
             //
+            JFreeChart pieChart = ChartFactory
+                    .createPieChart("", pieDataSet, true, true, true);
+            PiePlot p = (PiePlot)pieChart.getPlot();
+            ChartFrame frame = new ChartFrame("Gráfico de Pizza", pieChart);
+            frame.setVisible(true);
+            frame.setSize(450, 500);
+            //
             this.eleitorTableModel.setRowCount(0);
             //
-            // output = new Vector<String>();
             for (PerfilEleitor perf : eleitorado) {
                 String r[] = { perf.getUF(),
                         perf.getMunicipio(),
@@ -82,7 +99,6 @@ public class ComparaCandidatoEleitor implements ComparadorAbstratoCandidatoEleit
                 // output.add(s);
                 eleitorTableModel.addRow(r);
             }
-            // eleitoradoList.setListData(output);
         } catch (Exception e1) {
             // TODO Auto-generated catch block
             e1.printStackTrace();
