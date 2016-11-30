@@ -96,9 +96,15 @@ public class ComparaContasDesempenho implements ComparadorContasDesempenho {
         //
         DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
         //
+        int desp, votos;
+        Candidatura max_ = candidaturas.get(0);
+        desp = Integer.parseInt(max_.getDespesaMaximaCampanha()
+                                .replaceAll("[\\D]", ""));
+        votos = max_.getTotalVotos();
+        double norm_k = desp*1.0/votos;
         for (Candidatura cand : candidaturas) {
             if(cand.getDespesaMaximaCampanha().compareTo("\"-1\"") != 0){
-                dataSet.addValue(cand.getTotalVotos()*100, "Desempenho",
+                dataSet.addValue(cand.getTotalVotos()*norm_k, "Desempenho",
                                  cand.getNomeUrnaCandidato());
                 Integer despesa
                         = Integer.parseInt(cand.getDespesaMaximaCampanha()

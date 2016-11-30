@@ -13,7 +13,7 @@ public class Main {
         // DAO testing
         DAOTSE myDAO = new DAOTSE();
         myDAO.connect();
-        myDAO.insertAllPerfilEleitor();
+        // myDAO.insertAllPerfilEleitor();
         // myDAO.insertAllVotacaoCandidato();
         // myDAO.insertAllLegenda();
         // myDAO.insertAllBemDeCandidato(); // PB, RN
