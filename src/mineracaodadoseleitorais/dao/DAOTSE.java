@@ -45,7 +45,7 @@ public class DAOTSE extends AbstractElectionDAO {
         try {
             ftr.getAll();
             stmt = dbConnection.createStatement();
-            int i = 0;
+            int i = getCount("BemDeCandidato");
             for (Object ob : ftr.getRows()) {
                 BemDeCandidato bc = (BemDeCandidato) ob;
                 query = String.format("insert into BemDeCandidato values ('%s',"
@@ -67,7 +67,7 @@ public class DAOTSE extends AbstractElectionDAO {
         try {
             ftr.getAll();
             stmt = dbConnection.createStatement();
-            int i = 0;
+            int i = getCount("Candidatura");
             for (Object ob : ftr.getRows()) {
                 Candidatura cand = (Candidatura) ob;
                 query = String.format("insert into Candidatura values ('%s',"
@@ -101,7 +101,7 @@ public class DAOTSE extends AbstractElectionDAO {
         try {
             ftr.getAll();
             stmt = dbConnection.createStatement();
-            int i = 0;
+            int i = getCount("Legenda");
             for (Object ob : ftr.getRows()) {
                 Legenda leg = (Legenda) ob;
                 query = String.format("insert into Legenda values ('%s',"
@@ -123,7 +123,7 @@ public class DAOTSE extends AbstractElectionDAO {
         try {
             ftr.getAll();
             stmt = dbConnection.createStatement();
-            int i = 0;
+            int i = getCount("PerfilEleitor");
             for (Object ob : ftr.getRows()) {
                 PerfilEleitor pel = (PerfilEleitor) ob;
                 query = String.format("insert into PerfilEleitor values ('%s',"
@@ -139,13 +139,13 @@ public class DAOTSE extends AbstractElectionDAO {
         } catch (IOException e) {
         }
     }
-
+    
     public void insertAllVotacaoCandidato() throws SQLException, IOException {
         FileTableReader ftr = new VotacaoCandidatoFileTableReader();
         try {
             ftr.getAll();
             stmt = dbConnection.createStatement();
-            int i = 0;
+            int i = getCount("VotacaoCandidato");
             for (Object ob : ftr.getRows()) {
                 VotacaoCandidato vc = (VotacaoCandidato) ob;
                 query = String.format("insert into VotacaoCandidato values ('%s',"
@@ -666,6 +666,16 @@ public class DAOTSE extends AbstractElectionDAO {
     }
 
     // Print query result
+    public int getCount(String tableName) throws SQLException{
+        String query = "select count(*) from " + tableName;
+        Statement stmt = dbConnection.createStatement();
+        ResultSet results = stmt.executeQuery(query);
+        if(results.next())
+            return results.getInt(1);
+        else
+            return 0;
+    }
+    
     public void printGet(String tableName) throws SQLException {
         ResultSet results;
         results = get(tableName);

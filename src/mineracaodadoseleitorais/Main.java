@@ -3,11 +3,7 @@ package mineracaodadoseleitorais;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import mineracaodadoseleitorais.dao.DAOTSE;
-import mineracaodadoseleitorais.negocio.Candidatura;
-//import mineracaodadoseleitorais.negocio.PerfilEleitor;
-//import mineracaodadoseleitorais.negocio.VotacaoCandidato;
 
 public class Main {
     
@@ -17,11 +13,14 @@ public class Main {
         // DAO testing
         DAOTSE myDAO = new DAOTSE();
         myDAO.connect();
+        myDAO.insertAllPerfilEleitor();
+        // myDAO.insertAllVotacaoCandidato();
+        // myDAO.insertAllLegenda();
+        // myDAO.insertAllBemDeCandidato(); // PB, RN
         // myDAO.clearTable("Candidatura");
         // myDAO.insertAllCandidatura();
         // myDAO.clearTable("VOTACAOCANDIDATO");
         // myDAO.insertAllVotacaoCandidato();
-        // ArrayList<Candidatura> perfis = myDAO.getPerfisCandidaturasSecao("56");
         myDAO.disconnect();
     }
 }

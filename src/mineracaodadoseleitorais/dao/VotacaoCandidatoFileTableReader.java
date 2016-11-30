@@ -10,7 +10,7 @@ public class VotacaoCandidatoFileTableReader extends FileTableReader {
     static final String TABLE_PATH
             = "C:\\Users\\ronnypetsonss\\Documents\\UFRN 2016.2\\Projeto de Software"
             + "\\dados eleitorais de 2014\\votacao_candidato_munzona_2014\\votacao_candidato_munzona_2014_RN.txt";
-
+    
     public VotacaoCandidatoFileTableReader() throws IOException {
         super(TABLE_PATH);
         rows = new ArrayList<VotacaoCandidato>();

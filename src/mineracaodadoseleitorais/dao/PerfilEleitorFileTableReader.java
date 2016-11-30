@@ -10,7 +10,7 @@ public class PerfilEleitorFileTableReader extends FileTableReader {
     
     static final String TABLE_PATH
             = "C:\\Users\\ronnypetsonss\\Documents\\UFRN 2016.2\\Projeto de Software"
-            + "\\dados eleitorais de 2014\\perfil_eleitor_secao_2014_RN\\perfil_eleitor_secao_2014_RN.txt";
+            + "\\dados eleitorais de 2014\\perfil_eleitor_secao_2014_PB\\perfil_eleitor_secao_2014_PB.txt";
     
     public PerfilEleitorFileTableReader() throws IOException {
         super(TABLE_PATH);
