@@ -47,7 +47,7 @@ public class ComparaCandidatoEleitor implements ComparadorAbstratoCandidatoEleit
             dao.connect();
             //
             //
-            candidaturas = dao.getPerfisCandidaturas(regiao, cargo, false);
+            candidaturas = dao.getPerfisCandidaturas(regiao, cargo, turno, false);
             eleitorado = dao.getPerfisEleitores(regiao);
             dao.disconnect();
             //

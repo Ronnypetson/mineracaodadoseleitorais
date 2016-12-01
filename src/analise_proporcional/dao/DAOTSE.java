@@ -308,7 +308,8 @@ public class DAOTSE extends AbstractElectionDAO {
         return perfis;
     }
     
-    public ArrayList<Candidatura> getPerfisCandidaturas(String regiao, String cargo, final boolean ordByGastos) throws SQLException {
+    @Override
+    public ArrayList<Candidatura> getPerfisCandidaturas(String regiao, String cargo, String turno, final boolean ordByGastos) throws SQLException {
         regiao = regiao.toUpperCase();
         cargo = cargo.toUpperCase();
         //
@@ -357,7 +358,8 @@ public class DAOTSE extends AbstractElectionDAO {
         }
     }
     
-    public ArrayList<VotacaoCandidato> getPerfisVotacao(String regiao, String cargo) throws SQLException {
+    @Override
+    public ArrayList<VotacaoCandidato> getPerfisVotacao(String regiao, String cargo, String turno) throws SQLException {
         regiao = regiao.toUpperCase();
         cargo = cargo.toUpperCase();
         //

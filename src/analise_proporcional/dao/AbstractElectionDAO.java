@@ -15,6 +15,7 @@ import java.util.Comparator;
 import java.util.List;
 import analise_proporcional.negocio.Candidatura;
 import analise_proporcional.negocio.PerfilEleitor;
+import analise_proporcional.negocio.VotacaoCandidato;
 import java.util.TreeMap;
 
 /**
@@ -55,6 +56,12 @@ public abstract class AbstractElectionDAO {
         });
         return perfis;
     }
+    
+    public abstract ArrayList<VotacaoCandidato> getPerfisVotacao(String regiao, String cargo, String turno) throws SQLException;
+    
+    public abstract ArrayList<Candidatura> getPerfisCandidaturas(String regiao, String cargo, String turno, final boolean ordByGastos) throws SQLException;
+    
+    public abstract ArrayList<PerfilEleitor> getPerfisEleitores(String regiao) throws SQLException;
     
     public abstract ArrayList<Candidatura> ordenaCandidaturasPorDominancia(ArrayList<String[]> entries);
     
