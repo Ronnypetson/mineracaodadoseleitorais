@@ -101,7 +101,7 @@ public class TestGUI extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nome", "Sexo", "Partido", "Grau de instrução", "Cargo", "Total de votos"
+                "Nome", "Coligação", "Partido", "Nome da coligação", "Cargo", "Total de votos"
             }
         ) {
             Class[] types = new Class [] {
@@ -247,11 +247,11 @@ public class TestGUI extends javax.swing.JFrame {
 
         jLabel6.setText("Cargo");
 
-        CargoDistTxt.setText("Senador");
+        CargoDistTxt.setText("Deputado Estadual");
 
         jLabel7.setText("Região");
 
-        RegiaoDistTxt.setText("RN");
+        RegiaoDistTxt.setText("PB");
 
         jLabel8.setText("Turno");
 
@@ -305,7 +305,7 @@ public class TestGUI extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nome", "Sexo", "Partido", "Grau de instrução", "Cargo", "Total de votos"
+                "Nome", "Coligação", "Partido", "Nome da Coligação", "Cargo", "Total de votos"
             }
         ) {
             Class[] types = new Class [] {
@@ -356,11 +356,11 @@ public class TestGUI extends javax.swing.JFrame {
 
         jLabel11.setText("Cargo");
 
-        CargoCompTxt.setText("Senador");
+        CargoCompTxt.setText("Deputado Federal");
 
         jLabel12.setText("Região");
 
-        RegiaoCompTxt.setText("Natal");
+        RegiaoCompTxt.setText("PB");
 
         jLabel13.setText("Turno");
 

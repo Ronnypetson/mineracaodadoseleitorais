@@ -25,9 +25,6 @@ import java.util.TreeMap;
  */
 public class DAOTSE extends AbstractElectionDAO {
 
-    
-    //
-    
     public DAOTSE() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance(); // Client
         password = "123";
@@ -41,16 +38,6 @@ public class DAOTSE extends AbstractElectionDAO {
         this.NOME_COD_CARGO.put("\"GOVERNADOR\"", "\"3\"");
     }
     
-    /* @Override
-     public void connect() throws SQLException {
-     dbConnection
-     = DriverManager.getConnection(dbURL, userName, password);
-     } */
-    /* @Override
-     public void disconnect() throws SQLException {
-     // stmt.close();
-     dbConnection.close();
-     } */
     // Inserts
     public void insertAllBemDeCandidato() throws SQLException, IOException {
         BemDeCandidatoFileTableReader ftr = new BemDeCandidatoFileTableReader();
@@ -616,6 +603,7 @@ public class DAOTSE extends AbstractElectionDAO {
     @Override
     public ArrayList<Candidatura> ordenaCandidaturasPorGastos(ArrayList<String[]> entries){
         TreeMap<String, Candidatura> dominancias = new TreeMap<String, Candidatura>();
+        TreeMap<String, Integer> despesas = new TreeMap<String, Integer>();
         ArrayList<Candidatura> perfis = new ArrayList<Candidatura>();
         // TreeSet<String> hperfis = new TreeSet<String>();
         for (String[] entry : entries) {
@@ -630,9 +618,18 @@ public class DAOTSE extends AbstractElectionDAO {
             } else {
                 dominancias.put(seq, cand);
             }
+            seq = cand.getCodigoLegenda();
+            int desp = Integer.parseInt(cand.getDespesaMaximaCampanha().replaceAll("[\\D]", ""));
+            if(!despesas.containsKey(seq)){
+                despesas.put(seq, desp);
+            } else {
+                int total = despesas.get(seq);
+                despesas.replace(seq, total + votes);
+            }
         }
         //
         for(Candidatura c: dominancias.values()){
+            c.setDespesaMaximaCampanha("\"" + despesas.get(c.getCodigoLegenda()) + "\"");
             perfis.add(c);
         }
         //

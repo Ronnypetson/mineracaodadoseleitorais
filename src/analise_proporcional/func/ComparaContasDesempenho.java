@@ -62,9 +62,9 @@ public class ComparaContasDesempenho implements ComparadorContasDesempenho {
             for (Candidatura cand : candidaturas) {
                 if(cand.getDespesaMaximaCampanha().compareTo("\"-1\"") != 0){
                     String r[] = { cand.getNomeCandidato(),
-                        cand.getDescricaoSexo(),
+                        cand.getComposicaoLegenda(),
                         cand.getSiglaPartido(),
-                        cand.getDescricaoGrauInstrucao(),
+                        cand.getNomeLegenda(),
                         cand.getDescricaoCargo(),
                         "" + cand.getTotalVotos() };
                     candidatoTableModel.addRow(r);
