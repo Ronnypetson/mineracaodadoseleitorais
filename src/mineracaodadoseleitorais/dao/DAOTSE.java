@@ -494,8 +494,8 @@ public class DAOTSE extends AbstractElectionDAO {
         entries.sort(new Comparator<String[]>() {
             @Override
             public int compare(String[] arg0, String[] arg1) {
-                int a = Integer.parseInt(arg0[44].replaceAll("[\\D]", ""));
-                int b = Integer.parseInt(arg1[44].replaceAll("[\\D]", ""));
+                int a = Integer.parseInt(arg0[43].replaceAll("[\\D]", ""));
+                int b = Integer.parseInt(arg1[43].replaceAll("[\\D]", ""));
                 return Integer.compare(b, a);
             }
         });
@@ -590,7 +590,7 @@ public class DAOTSE extends AbstractElectionDAO {
             cand.setAll(entry);
             // perfis.add(cand);
             String seq = cand.getSeqCandidato();
-            int votes = Integer.parseInt(entry[44].replaceAll("[\\D]", ""));
+            int votes = Integer.parseInt(entry[43].replaceAll("[\\D]", ""));
             if(dominancias.containsKey(seq)){
                 int total = dominancias.get(seq).getTotalVotos();
                 dominancias.get(seq).setTotalVotos(total + votes);
@@ -624,7 +624,7 @@ public class DAOTSE extends AbstractElectionDAO {
             cand.setAll(entry);
             // perfis.add(cand);
             String seq = cand.getSeqCandidato();
-            int votes = Integer.parseInt(entry[44].replaceAll("[\\D]", ""));
+            int votes = Integer.parseInt(entry[43].replaceAll("[\\D]", ""));
             if(dominancias.containsKey(seq)){
                 int total = dominancias.get(seq).getTotalVotos();
                 dominancias.get(seq).setTotalVotos(total + votes);

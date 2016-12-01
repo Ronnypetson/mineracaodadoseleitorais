@@ -63,29 +63,29 @@ public class VotacaoCandidato extends Votacao {
     @Override
     public void setAll(String[] entry){
         this.NumeroCandidato = entry[0];
-        this.SeqCandidato = entry[1];
-        this.NomeCandidato = entry[2];
-        this.NomeUrnaCandidato = entry[3];
-        this.CodigoSituacaoCandidatoSuperior = entry[4];
-        this.DescricaoSituacaoCandidatoSuperior = entry[5];
-        this.CodigoSituacaoCandidato = entry[6];
-        this.DescricaoSituacaoCandidato = entry[7];
-        this.CodigoSituacaoCandidatoTotal = entry[8];
-        this.DescricaoSituacaoCandidatoTotal = entry[9];
-        this.NumeroPartido = entry[10];
-        this.SiglaPartido = entry[11];
-        this.SeqLegenda = entry[12];
-        this.NomeColigacao = entry[13];
-        this.ComposicaoLegenda = entry[14];
-        this.TotalVotos = entry[15];
-        this.VotoEmTransito = entry[16];
+        this.NomeCandidato = entry[1];
+        this.NomeUrnaCandidato = entry[2];
+        this.CodigoSituacaoCandidatoSuperior = entry[3];
+        this.DescricaoSituacaoCandidatoSuperior = entry[4];
+        this.CodigoSituacaoCandidato = entry[5];
+        this.DescricaoSituacaoCandidato = entry[6];
+        this.CodigoSituacaoCandidatoTotal = entry[7];
+        this.DescricaoSituacaoCandidatoTotal = entry[8];
+        this.NumeroPartido = entry[9];
+        this.SiglaPartido = entry[10];
+        this.SeqLegenda = entry[11];
+        this.NomeColigacao = entry[12];
+        this.ComposicaoLegenda = entry[13];
+        this.TotalVotos = entry[14];
+        this.VotoEmTransito = entry[15];
         // ID
-        this.CodigoMunicipio = entry[18];
-        this.NomeMunicipio = entry[19];
-        this.NumZona = entry[20];
-        this.CodigoCargo = entry[21];
-        this.NumTurno = entry[22];
-        this.SiglaUF = entry[23];
+        this.CodigoMunicipio = entry[17];
+        this.NomeMunicipio = entry[18];
+        this.NumZona = entry[19];
+        this.CodigoCargo = entry[20];
+        this.NumTurno = entry[21];
+        this.SiglaUF = entry[22];
+        this.SeqCandidato = entry[23];
     }
     
     public String getNumeroCandidato() {
