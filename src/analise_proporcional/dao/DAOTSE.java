@@ -217,6 +217,7 @@ public class DAOTSE extends AbstractElectionDAO {
     }
     
     // Query
+    @Override
     public ArrayList<PerfilEleitor> getPerfisEleitores(String regiao) throws SQLException {
         regiao = regiao.toUpperCase();
         String condition;
