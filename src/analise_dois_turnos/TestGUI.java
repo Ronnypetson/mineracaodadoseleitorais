@@ -148,15 +148,15 @@ public class TestGUI extends javax.swing.JFrame {
 
         jLabel3.setText("Cargo");
 
-        CargoTextField.setText("Senador");
+        CargoTextField.setText("Governador");
 
         jLabel4.setText("Região");
 
-        RegiaoTextField.setText("Natal");
+        RegiaoTextField.setText("RN");
 
         jLabel5.setText("Turno");
 
-        TurnoComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1" }));
+        TurnoComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -434,7 +434,7 @@ public class TestGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1)
                 .addContainerGap())
         );
         layout.setVerticalGroup(

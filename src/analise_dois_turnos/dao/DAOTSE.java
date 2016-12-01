@@ -29,16 +29,6 @@ public class DAOTSE extends AbstractElectionDAO {
         userName = "ronny";
     }
 
-    /* @Override
-     public void connect() throws SQLException {
-     dbConnection
-     = DriverManager.getConnection(dbURL, userName, password);
-     } */
-    /* @Override
-     public void disconnect() throws SQLException {
-     // stmt.close();
-     dbConnection.close();
-     } */
     // Inserts
     public void insertAllBemDeCandidato() throws SQLException, IOException {
         BemDeCandidatoFileTableReader ftr = new BemDeCandidatoFileTableReader();
@@ -218,6 +208,7 @@ public class DAOTSE extends AbstractElectionDAO {
     }
     
     // Query
+    @Override
     public ArrayList<PerfilEleitor> getPerfisEleitores(String regiao) throws SQLException {
         regiao = regiao.toUpperCase();
         String condition;
@@ -309,7 +300,8 @@ public class DAOTSE extends AbstractElectionDAO {
         return perfis;
     }
     
-    public ArrayList<Candidatura> getPerfisCandidaturas(String regiao, String cargo, final boolean ordByGastos) throws SQLException {
+    @Override
+    public ArrayList<Candidatura> getPerfisCandidaturas(String regiao, String cargo, String turno, final boolean ordByGastos) throws SQLException {
         regiao = regiao.toUpperCase();
         cargo = cargo.toUpperCase();
         //
@@ -326,13 +318,13 @@ public class DAOTSE extends AbstractElectionDAO {
         query =   " SELECT * FROM Candidatura"
                 + " INNER JOIN VotacaoCandidato"
                 + " ON "
-                // + " CAST( Candidatura.SeqCandidato AS VARCHAR(128) ) = "
-                // + " CAST( VotacaoCandidato.SeqCandidato AS VARCHAR(128) ) "
                 + " Candidatura.SeqCandidato = VotacaoCandidato.SeqCandidato"
                 + " WHERE "
                 + " CAST( CANDIDATURA.DESCRICAOCARGO AS VARCHAR(128) ) = "
                 + " '\"" + cargo + "\"'"
-                + localidade;
+                + localidade
+                + " AND CAST( VotacaoCandidato.NumTurno AS VARCHAR(128) ) = "
+                + " '\"" + turno + "\"'";
         //
         Statement select = dbConnection.createStatement();
         ResultSet results = select.executeQuery(query);
@@ -350,40 +342,6 @@ public class DAOTSE extends AbstractElectionDAO {
         // Calcular a dominancia dos candidatos
         // Calcular os gastos de campanha
         //
-        /* TreeMap<String, Candidatura> dominancias = new TreeMap<String, Candidatura>();
-        ArrayList<Candidatura> perfis = new ArrayList<Candidatura>();
-        // TreeSet<String> hperfis = new TreeSet<String>();
-        for (String[] entry : entries) {
-            Candidatura cand = new Candidatura();
-            cand.setAll(entry);
-            // perfis.add(cand);
-            String seq = cand.getSeqCandidato();
-            int votes = Integer.parseInt(entry[44].replaceAll("[\\D]", ""));
-            if(dominancias.containsKey(seq)){
-                int total = dominancias.get(seq).getTotalVotos();
-                dominancias.get(seq).setTotalVotos(total + votes);
-            } else {
-                dominancias.put(seq, cand);
-            }
-        }
-        //
-        for(Candidatura c: dominancias.values()){
-            perfis.add(c);
-        }
-        //
-        perfis.sort(new Comparator<Candidatura>(){
-            @Override
-            public int compare(Candidatura o1, Candidatura o2) {
-                if(ordByGastos){
-                    int a = Integer.parseInt(o1.getDespesaMaximaCampanha().replaceAll("[\\D]", ""));
-                    int b = Integer.parseInt(o2.getDespesaMaximaCampanha().replaceAll("[\\D]", ""));
-                    return Integer.compare(b, a);
-                } else {
-                    return Integer.compare(o2.getTotalVotos(), o1.getTotalVotos());
-                }
-            }
-        }); */
-        //
         if(ordByGastos){
             return this.ordenaCandidaturasPorGastos(entries);
         } else {
@@ -391,7 +349,8 @@ public class DAOTSE extends AbstractElectionDAO {
         }
     }
     
-    public ArrayList<VotacaoCandidato> getPerfisVotacao(String regiao, String cargo) throws SQLException {
+    @Override
+    public ArrayList<VotacaoCandidato> getPerfisVotacao(String regiao, String cargo, String turno) throws SQLException {
         regiao = regiao.toUpperCase();
         cargo = cargo.toUpperCase();
         //
@@ -414,7 +373,9 @@ public class DAOTSE extends AbstractElectionDAO {
                 + " WHERE "
                 + " CAST( CANDIDATURA.DESCRICAOCARGO AS VARCHAR(128) ) = "
                 + " '\"" + cargo + "\"'"
-                + localidade;
+                + localidade
+                + " AND CAST( VotacaoCandidato.NumTurno AS VARCHAR(128) ) = "
+                + " '\"" + turno + "\"'";
         //
         Statement select = dbConnection.createStatement();
         ResultSet results = select.executeQuery(query);

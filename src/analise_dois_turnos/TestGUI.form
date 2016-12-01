@@ -261,7 +261,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="CargoTextField">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Senador"/>
+                <Property name="text" type="java.lang.String" value="Governador"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
@@ -271,7 +271,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="RegiaoTextField">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Natal"/>
+                <Property name="text" type="java.lang.String" value="RN"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">
@@ -282,8 +282,9 @@
             <Component class="javax.swing.JComboBox" name="TurnoComboBox">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="1">
+                  <StringArray count="2">
                     <StringItem index="0" value="1"/>
+                    <StringItem index="1" value="2"/>
                   </StringArray>
                 </Property>
               </Properties>

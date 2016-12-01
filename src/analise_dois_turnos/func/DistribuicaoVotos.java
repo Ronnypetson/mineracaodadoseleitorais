@@ -49,7 +49,7 @@ public class DistribuicaoVotos implements DistribuicaoAbstrataDeVotos {
         try{
             daoTSE = new DAOTSE();
             daoTSE.connect();
-            votacao = daoTSE.getPerfisVotacao(regiao, cargo);
+            votacao = daoTSE.getPerfisVotacao(regiao, cargo, turno);
             daoTSE.disconnect();
             //
             this.distTableModel.setRowCount(0);

@@ -47,7 +47,7 @@ public class ComparaCandidatoEleitor implements ComparadorAbstratoCandidatoEleit
             dao.connect();
             //
             //
-            candidaturas = dao.getPerfisCandidaturas(regiao, cargo, false);
+            candidaturas = dao.getPerfisCandidaturas(regiao, cargo, turno, false);
             eleitorado = dao.getPerfisEleitores(regiao);
             dao.disconnect();
             //
@@ -110,7 +110,7 @@ public class ComparaCandidatoEleitor implements ComparadorAbstratoCandidatoEleit
         frame.setSize(450, 500);
         //
     }
-
+    
     public void setCorrelacao(String nomeMunicipio) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
