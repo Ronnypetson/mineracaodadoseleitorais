@@ -129,7 +129,7 @@ public class ComparaCandidatoEleitor implements ComparadorAbstratoCandidatoEleit
         }
         //
         JFreeChart pieChart = ChartFactory
-                .createPieChart("Candidatos", pieDataSet, true, true, true);
+                .createPieChart("Candidatos", pieDataSet, false, true, true);
         PiePlot p = (PiePlot)pieChart.getPlot();
         ChartFrame frame = new ChartFrame("", pieChart);
         frame.setVisible(true);

@@ -103,7 +103,9 @@ public class DistribuicaoVotos implements DistribuicaoAbstrataDeVotos {
         JFreeChart chart
                 = ChartFactory
                         .createStackedBarChart("Distribuição de votos",
-                                               "Candidatos", "Votos", dataSet);
+                                               "Candidatos", "Votos", dataSet,
+                                               PlotOrientation.VERTICAL,
+                                               false, true, true);
         CategoryPlot p = chart.getCategoryPlot();
         p.setRangeGridlinePaint(Color.black);
         ChartFrame frame = new ChartFrame("", chart);
