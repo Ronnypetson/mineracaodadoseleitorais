@@ -51,9 +51,9 @@ public class ComparaContasDesempenho implements ComparadorContasDesempenho {
             dao = new DAOTSE();
             dao.connect();
             //
-            candidaturas = dao.getPerfisCandidaturas(regiao, cargo, false);
+            candidaturas = dao.getPerfisCandidaturas(regiao, cargo, turno, false);
             //
-            gastos = dao.getPerfisCandidaturas(regiao, cargo, true);
+            gastos = dao.getPerfisCandidaturas(regiao, cargo, turno, true);
             //
             dao.disconnect();
             //
