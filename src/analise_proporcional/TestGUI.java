@@ -101,7 +101,7 @@ public class TestGUI extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nome", "Coligação", "Partido", "Nome da coligação", "Cargo", "Total de votos"
+                "Nome", "Coligação", "Partido", "Nome da coligação", "Cargo", "Desempenho"
             }
         ) {
             Class[] types = new Class [] {
@@ -305,7 +305,7 @@ public class TestGUI extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nome", "Coligação", "Partido", "Nome da Coligação", "Cargo", "Total de votos"
+                "Nome", "Coligação", "Partido", "Nome da Coligação", "Cargo", "Desempenho"
             }
         ) {
             Class[] types = new Class [] {
