@@ -18,17 +18,14 @@ import analise_dois_turnos.negocio.*;
  * @author ronnypetsonss
  */
 public class DAOTSE extends AbstractElectionDAO {
-
-    
     //
-    
     public DAOTSE() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance(); // Client
         password = "123";
         dbURL = "jdbc:derby://localhost:1527/db_test1";
         userName = "ronny";
     }
-
+    
     // Inserts
     public void insertAllBemDeCandidato() throws SQLException, IOException {
         BemDeCandidatoFileTableReader ftr = new BemDeCandidatoFileTableReader();
@@ -233,16 +230,8 @@ public class DAOTSE extends AbstractElectionDAO {
             perf.setAll(entry);
             perfis.add(perf);
         }
-        // perfis = this.ordenaPerfisDeEleitorPorDominancia(perfis);
-        /* perfis.sort(new Comparator<PerfilEleitor>() {
-            @Override
-            public int compare(PerfilEleitor o1, PerfilEleitor o2) {
-                int a = Integer.parseInt(o1.getQtdNoPerfil().replaceAll("[\\D]", ""));
-                int b = Integer.parseInt(o2.getQtdNoPerfil().replaceAll("[\\D]", ""));
-                return Integer.compare(b, a);
-            }
-        }); */
-
+        select.close();
+        results.close();
         return this.ordenaPerfisDeEleitorPorDominancia(perfis);
     }
 
@@ -276,7 +265,8 @@ public class DAOTSE extends AbstractElectionDAO {
                 return Integer.compare(b, a);
             }
         });
-
+        results.close();
+        select.close();
         return perfis;
     }
 
@@ -297,6 +287,7 @@ public class DAOTSE extends AbstractElectionDAO {
             perf.setAll(entry);
             perfis.add(perf);
         }
+        stmt.close();
         return perfis;
     }
     
@@ -338,6 +329,8 @@ public class DAOTSE extends AbstractElectionDAO {
             }
             entries.add(entry);
         }
+        results.close();
+        select.close();
         //
         // Calcular a dominancia dos candidatos
         // Calcular os gastos de campanha
@@ -389,6 +382,8 @@ public class DAOTSE extends AbstractElectionDAO {
             }
             entries.add(entry);
         }
+        results.close();
+        select.close();
         //
         // Calcular a dominancia dos candidatos
         // Calcular os gastos de campanha

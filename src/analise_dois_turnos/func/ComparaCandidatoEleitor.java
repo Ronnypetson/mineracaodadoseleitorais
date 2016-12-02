@@ -10,10 +10,14 @@ import javax.swing.table.DefaultTableModel;
 import analise_dois_turnos.dao.DAOTSE;
 import analise_dois_turnos.negocio.Candidatura;
 import analise_dois_turnos.negocio.PerfilEleitor;
+import java.awt.Color;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PiePlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 
 public class ComparaCandidatoEleitor implements ComparadorAbstratoCandidatoEleitor {
@@ -52,6 +56,7 @@ public class ComparaCandidatoEleitor implements ComparadorAbstratoCandidatoEleit
             dao.disconnect();
             //
             this.candidatoTableModel.setRowCount(0);
+            // clearTable(candidatoTableModel);
             for (Candidatura cand : candidaturas) {
                 if(cand.getDespesaMaximaCampanha().compareTo("\"-1\"") != 0){
                     String r[] = { cand.getNomeCandidato(),
@@ -64,8 +69,10 @@ public class ComparaCandidatoEleitor implements ComparadorAbstratoCandidatoEleit
                 }
             }
             setGraficoCandidato(candidaturas);
+            candidaturas.clear();
             //
             this.eleitorTableModel.setRowCount(0);
+            // clearTable(eleitorTableModel);
             for (PerfilEleitor perf : eleitorado) {
                 String r[] = { perf.getUF(),
                         perf.getMunicipio(),
@@ -77,6 +84,7 @@ public class ComparaCandidatoEleitor implements ComparadorAbstratoCandidatoEleit
                 eleitorTableModel.addRow(r);
             }
             setGraficoEleitor(eleitorado);
+            eleitorado.clear();
             //
         } catch (Exception e1) {
             // TODO Auto-generated catch block
@@ -84,6 +92,7 @@ public class ComparaCandidatoEleitor implements ComparadorAbstratoCandidatoEleit
         }
     }
     
+    @Override
     public void setGraficoEleitor(ArrayList<PerfilEleitor> eleitores) {
         //
         // Pie Chart
@@ -111,29 +120,40 @@ public class ComparaCandidatoEleitor implements ComparadorAbstratoCandidatoEleit
         //
     }
     
+    @Override
     public void setCorrelacao(String nomeMunicipio) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    @Override
     public void setGraficoCandidato(ArrayList<Candidatura> cands) {
         //
         // Pie Chart
         //
-        DefaultPieDataset pieDataSet = new DefaultPieDataset();
+        DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
         //
         for (Candidatura cand : cands) {
             if(cand.getDespesaMaximaCampanha().compareTo("\"-1\"") != 0){
-                pieDataSet.setValue(cand.getNomeUrnaCandidato(),
-                                    cand.getTotalVotos());
+                dataSet.setValue(cand.getTotalVotos(), "",
+                        cand.getNomeUrnaCandidato());
             }
         }
         //
-        JFreeChart pieChart = ChartFactory
-                .createPieChart("Candidatos", pieDataSet, true, true, true);
-        PiePlot p = (PiePlot)pieChart.getPlot();
-        ChartFrame frame = new ChartFrame("", pieChart);
+        JFreeChart chart = ChartFactory
+                .createBarChart("Votos", "Candidato", "-", dataSet,
+                        PlotOrientation.VERTICAL, true, true, true);
+        CategoryPlot p = chart.getCategoryPlot();
+        p.setRangeGridlinePaint(Color.black);
+        ChartFrame frame = new ChartFrame("", chart);
         frame.setVisible(true);
         frame.setSize(450, 500);
         //
+    }
+    
+    public void clearTable(DefaultTableModel t){
+        int n = t.getRowCount();
+        for(int i = n-1; i >= 0; i--){
+            t.removeRow(i);
+        }
     }
 }

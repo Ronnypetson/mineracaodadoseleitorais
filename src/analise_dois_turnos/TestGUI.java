@@ -449,14 +449,12 @@ public class TestGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ListarPerfisButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarPerfisButtonActionPerformed
-        // TODO add your handling code here:
-        
+        // TODO add your handling code here
         new ComparaCandidatoEleitor(this.CandidatosTable,
                                     this.EleitoresTable,
                                     this.RegiaoTextField.getText(),
                                     (String)this.TurnoComboBox.getSelectedItem(),
-                                    this.CargoTextField.getText())
-                .actionPerformed(evt);
+                                    this.CargoTextField.getText()).actionPerformed(evt);
     }//GEN-LAST:event_ListarPerfisButtonActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
