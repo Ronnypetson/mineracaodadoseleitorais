@@ -17,6 +17,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.TreeMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -218,7 +220,7 @@ public class DAOTSE extends AbstractElectionDAO {
     
     // Query
     @Override
-    public ArrayList<PerfilEleitor> getPerfisEleitores(String regiao) throws SQLException {
+    public ArrayList<PerfilEleitor> getPerfisEleitores(String regiao) throws SQLException  { // throws SQLException
         regiao = regiao.toUpperCase();
         String condition;
         if(this.UF.contains(regiao)){
@@ -228,8 +230,18 @@ public class DAOTSE extends AbstractElectionDAO {
         }
         query = String.format("select * from PerfilEleitor"
                         + " where " + condition);
-        Statement select = dbConnection.createStatement();
-        ResultSet results = select.executeQuery(query);
+        Statement select = null;
+        try {
+            select = dbConnection.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOTSE.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ResultSet results = null;
+        try {
+            results = select.executeQuery(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOTSE.class.getName()).log(Level.SEVERE, null, ex);
+        }
         //
         ArrayList<PerfilEleitor> perfis = new ArrayList<PerfilEleitor>();
         int columnCount = results.getMetaData().getColumnCount();

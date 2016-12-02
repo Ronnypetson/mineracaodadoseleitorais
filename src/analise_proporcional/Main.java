@@ -10,7 +10,7 @@ public class Main {
     public static void main(String[] args)
             throws ClassNotFoundException, InstantiationException,
             IllegalAccessException, SQLException, IOException {
-        // DAO testing
+        // DAO testing //
         DAOTSE myDAO = new DAOTSE();
         myDAO.connect();
         // myDAO.insertAllPerfilEleitor();

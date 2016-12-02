@@ -68,6 +68,7 @@ public class DistribuicaoVotos implements DistribuicaoAbstrataDeVotos {
             }
             setGraficoDeDistribuicao(votacao);
             //
+            // System.gc();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DistribuicaoVotos.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {

@@ -450,7 +450,8 @@ public class TestGUI extends javax.swing.JFrame {
 
     private void ListarPerfisButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarPerfisButtonActionPerformed
         // TODO add your handling code here:
-        
+        // this.CandidatosTable = new javax.swing.JTable();
+        // this.EleitoresTable = new javax.swing.JTable();
         new ComparaCandidatoEleitor(this.CandidatosTable,
                                     this.EleitoresTable,
                                     this.RegiaoTextField.getText(),
